@@ -10,6 +10,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
     <script>
         tailwind.config = {
             theme: {
@@ -68,10 +73,10 @@
 
     <header class="sticky top-0 z-50 bg-navy/95 backdrop-blur-md border-b border-gold/20 shadow-xl transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-24 flex items-center justify-between">
-            <!-- Brand Logo Only (Text removed) -->
+            <!-- Brand Logo Only -->
             <div class="flex items-center space-x-3">
                 <div id="brandLogoContainer" class="flex items-center justify-center overflow-hidden flex-shrink-0">
-                    <img src="1000143465_3.jpg" alt="Logo" class="h-14 w-auto object-contain drop-shadow-md">
+                    <img src="" alt="Logo" class="h-14 w-auto object-contain drop-shadow-md">
                 </div>
             </div>
 
@@ -85,9 +90,8 @@
                 <a href="#contact" class="text-gray-200 hover:text-gold transition">Contact</a>
             </nav>
 
-            <!-- Cart Toggle Button (Text "Cart" removed) & Mobile Hamburger -->
+            <!-- Cart Toggle Button & Mobile Hamburger -->
             <div class="flex items-center space-x-4">
-                <!-- Icon-only Cart Button -->
                 <button onclick="toggleCartDrawer()" class="relative bg-gradient-to-r from-gold to-gold-dark hover:from-gold-light hover:to-gold text-navy-dark font-bold p-3 rounded-xl shadow-lg transition transform hover:scale-105 flex items-center justify-center">
                     <i class="fa-solid fa-cart-shopping text-xl"></i>
                     <span id="cartBadge" class="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-black w-6 h-6 rounded-full flex items-center justify-center shadow-md border-2 border-navy-dark">0</span>
@@ -185,7 +189,7 @@
                 </div>
                 <div class="relative">
                     <div class="rounded-3xl overflow-hidden shadow-2xl border-4 border-gold/30">
-                        <img id="aboutInteriorImg" src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&auto=format&fit=crop&q=80" alt="Restaurant Chez Claudette" class="w-full h-auto object-cover">
+                        <img id="aboutInteriorImg" src="" alt="Restaurant Chez Claudette" class="w-full h-auto object-cover">
                     </div>
                     <div class="absolute -bottom-6 -left-6 bg-gold text-navy-dark p-6 rounded-2xl shadow-2xl hidden sm:block border-2 border-white/20">
                         <p class="font-display font-bold text-2xl">Chez Claudette</p>
@@ -453,7 +457,7 @@
             
             <!-- Logo in Footer -->
             <div id="footerBrandLogoContainer" class="flex items-center justify-center overflow-hidden flex-shrink-0">
-                <img src="1000143465_3.jpg" alt="Logo" class="h-14 w-auto object-contain drop-shadow-md">
+                <img src="" alt="Logo" class="h-14 w-auto object-contain drop-shadow-md">
             </div>
             
             <!-- Admin Control Panel Trigger Button -->
@@ -585,9 +589,28 @@
     </div>
 
     <script>
-        let restaurantData = {
+        // ==========================================
+        // Firebase Configuration (Nezar Project)
+        // ==========================================
+        const firebaseConfig = {
+            apiKey: "AIzaSyCH8nVn6qwFNYaUzGAZtQWL8w1soZcUsJ0",
+            authDomain: "dnezar.firebaseapp.com",
+            databaseURL: "https://dnezar-default-rtdb.europe-west1.firebasedatabase.app",
+            projectId: "dnezar",
+            storageBucket: "dnezar.firebasestorage.app",
+            messagingSenderId: "777600446729",
+            appId: "1:777600446729:web:6a20322111e01cd98463d8",
+            measurementId: "G-SWHP22HFRQ"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        // Default Data if Database is Empty
+        const defaultRestaurantData = {
             name: "Chez Claudette",
-            logoUrl: "1000143465_3.jpg",
+            logoUrl: "https://i.ibb.co/example/logo.jpg", 
             interiorUrl: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&auto=format&fit=crop&q=80",
             sliderImages: [
                 { img: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=600&auto=format&fit=crop&q=80", title: "Legendary Poutines", tag: "Signature" },
@@ -604,21 +627,35 @@
                         { name: "Traditional Poutine", desc: "Crispy fries, fresh cheese curds, and rich hot gravy.", price: "$11.50", img: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=500&auto=format&fit=crop&q=80" },
                         { name: "The 5 Stars Poutine", desc: "Loaded with extra cheese curds, savory bacon, and house special sauce.", price: "$14.75", img: "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?w=500&auto=format&fit=crop&q=80" }
                     ]
-                },
-                {
-                    id: "sandwiches",
-                    name: "Sandwiches",
-                    icon: "fa-hotdog",
-                    items: [
-                        { name: "BLT Sandwich", desc: "Crispy bacon, fresh lettuce, and juicy tomatoes on toasted bread.", price: "$8.50", img: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=500&auto=format&fit=crop&q=80" }
-                    ]
                 }
             ]
         };
 
+        let restaurantData = defaultRestaurantData;
         let activeCategory = 'poutines';
         let adminActiveCat = 'poutines';
         let customerCart = [];
+
+        // Fetch Data from Firestore on Load
+        function loadDataFromFirebase() {
+            db.collection("restaurant").doc("config").get().then((doc) => {
+                if (doc.exists) {
+                    restaurantData = doc.data();
+                    if(restaurantData.menuCategories && restaurantData.menuCategories.length > 0) {
+                        activeCategory = restaurantData.menuCategories[0].id;
+                        adminActiveCat = activeCategory;
+                    }
+                    renderAll();
+                } else {
+                    db.collection("restaurant").doc("config").set(defaultRestaurantData).then(() => {
+                        renderAll();
+                    });
+                }
+            }).catch((error) => {
+                console.error("Error getting document:", error);
+                renderAll();
+            });
+        }
 
         function renderAll() {
             document.getElementById('heroRestaurantName').innerText = restaurantData.name;
@@ -634,13 +671,11 @@
                 }
             });
 
-            // Render Restaurant Interior Image
             const interiorImg = document.getElementById('aboutInteriorImg');
             if (restaurantData.interiorUrl) {
                 interiorImg.src = restaurantData.interiorUrl;
             }
 
-            // Render Slider
             const sliderContainer = document.getElementById('sliderContainer');
             let sliderHTML = '';
             const itemsToRender = [...restaurantData.sliderImages, ...restaurantData.sliderImages];
@@ -659,7 +694,6 @@
             });
             sliderContainer.innerHTML = sliderHTML;
 
-            // Render Menu Tabs
             const catContainer = document.getElementById('categoryTabs');
             catContainer.innerHTML = '';
             restaurantData.menuCategories.forEach(cat => {
@@ -676,7 +710,6 @@
                 catContainer.appendChild(btn);
             });
 
-            // Render Menu Items with Product Images
             const menuContainer = document.getElementById('menuItemsContainer');
             menuContainer.innerHTML = '';
             const category = restaurantData.menuCategories.find(c => c.id === activeCategory);
@@ -707,10 +740,8 @@
             }
         }
 
-        // Shopping Cart Management Functions
         function toggleCartDrawer() {
-            const drawer = document.getElementById('cartDrawer');
-            drawer.classList.toggle('hidden');
+            document.getElementById('cartDrawer').classList.toggle('hidden');
         }
 
         function addToCart(item) {
@@ -786,7 +817,6 @@
             toggleCartDrawer();
         }
 
-        // Authentication Flow
         function openAdminModal() {
             document.getElementById('loginModal').classList.remove('hidden');
             document.getElementById('loginUser').value = '';
@@ -965,9 +995,16 @@
                 });
             }
 
-            closeAdminModal();
-            renderAll();
-            showNotification('Changes saved and website updated successfully!');
+            // Save changes directly to Firebase Firestore
+            db.collection("restaurant").doc("config").set(restaurantData)
+                .then(() => {
+                    closeAdminModal();
+                    renderAll();
+                    showNotification('Saved to Firebase successfully!');
+                })
+                .catch((error) => {
+                    alert("Error saving data: " + error);
+                });
         }
 
         function toggleMobileMenu() {
@@ -988,8 +1025,9 @@
             setTimeout(() => div.remove(), 4000);
         }
 
+        // Load data on page startup
         window.onload = function() {
-            renderAll();
+            loadDataFromFirebase();
             renderCart();
         };
     </script>
