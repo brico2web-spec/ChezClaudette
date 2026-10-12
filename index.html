@@ -9,7 +9,7 @@
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Cairo:wght@400;600;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
@@ -27,9 +27,8 @@
                         }
                     },
                     fontFamily: {
-                        display: ['"Playfair Display"', 'Cairo', 'serif'],
-                        sans: ['Inter', 'Cairo', 'sans-serif'],
-                        arabic: ['Cairo', 'sans-serif']
+                        display: ['"Playfair Display"', 'serif'],
+                        sans: ['Inter', 'sans-serif']
                     }
                 }
             }
@@ -59,7 +58,7 @@
             animation-play-state: paused;
         }
         body {
-            font-family: 'Inter', 'Cairo', sans-serif;
+            font-family: 'Inter', sans-serif;
             background-color: #0a172c;
             color: #f3f4f6;
         }
@@ -70,38 +69,35 @@
     <header class="sticky top-0 z-50 bg-navy/95 backdrop-blur-md border-b border-gold/20 shadow-xl transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-24 flex items-center justify-between">
             <!-- Brand Logo / Title -->
-            <div class="flex items-center space-x-3 rtl:space-x-reverse">
-                <div id="brandLogoContainer" class="w-12 h-12 rounded-full bg-gold flex items-center justify-center text-navy-dark font-bold text-2xl shadow-lg border-2 border-white/20 overflow-hidden">
-                    <i class="fa-solid fa-utensils" id="brandLogoIcon"></i>
+            <div class="flex items-center space-x-3">
+                <div id="brandLogoContainer" class="flex items-center justify-center overflow-hidden flex-shrink-0">
+                    <img src="1000143465_3.jpg" alt="Logo" class="h-14 w-auto object-contain drop-shadow-md">
                 </div>
                 <div>
-                    <span class="block text-xs uppercase tracking-widest text-gold font-semibold lang-rest" data-en="RESTAURANT" data-ar="مطعم">RESTAURANT</span>
+                    <span class="block text-xs uppercase tracking-widest text-gold font-semibold">RESTAURANT</span>
                     <h1 id="brandTitle" class="text-2xl sm:text-3xl font-display font-bold text-gold tracking-wide">Chez Claudette</h1>
                 </div>
             </div>
 
             <!-- Desktop Nav Links -->
-            <nav class="hidden md:flex items-center space-x-8 rtl:space-x-reverse font-medium text-lg">
-                <a href="#home" class="text-gray-200 hover:text-gold transition lang-nav-home" data-en="Home" data-ar="الرئيسية">Home</a>
-                <a href="#about" class="text-gray-200 hover:text-gold transition lang-nav-about" data-en="About Us" data-ar="من نحن">About Us</a>
-                <a href="#menu" class="text-gray-200 hover:text-gold transition lang-nav-menu" data-en="Our Menu" data-ar="قائمة الطعام">Our Menu</a>
-                <a href="#reviews" class="text-gray-200 hover:text-gold transition lang-nav-reviews" data-en="Google Reviews" data-ar="تقييمات جوجل">Google Reviews</a>
-                <a href="#services" class="text-gray-200 hover:text-gold transition lang-nav-services" data-en="Services & Info" data-ar="الخدمات والمعلومات">Services & Info</a>
-                <a href="#contact" class="text-gray-200 hover:text-gold transition lang-nav-contact" data-en="Contact" data-ar="اتصل بنا">Contact</a>
+            <nav class="hidden md:flex items-center space-x-8 font-medium text-lg">
+                <a href="#home" class="text-gray-200 hover:text-gold transition">Home</a>
+                <a href="#about" class="text-gray-200 hover:text-gold transition">About Us</a>
+                <a href="#menu" class="text-gray-200 hover:text-gold transition">Our Menu</a>
+                <a href="#reviews" class="text-gray-200 hover:text-gold transition">Google Reviews</a>
+                <a href="#services" class="text-gray-200 hover:text-gold transition">Services & Info</a>
+                <a href="#contact" class="text-gray-200 hover:text-gold transition">Contact</a>
             </nav>
 
-            <!-- Cart Toggle Button, Language Toggle & Mobile Hamburger -->
-            <div class="flex items-center space-x-4 rtl:space-x-reverse">
-                <!-- Cart Button -->
-                <button onclick="toggleCartDrawer()" class="relative bg-gold/20 hover:bg-gold hover:text-navy-dark text-gold border border-gold p-3 rounded-xl transition flex items-center justify-center shadow-md">
+            <!-- Updated Cart Toggle Button & Mobile Hamburger -->
+            <div class="flex items-center space-x-4">
+                <!-- Modern Styled Cart Button -->
+                <button onclick="toggleCartDrawer()" class="relative bg-gradient-to-r from-gold to-gold-dark hover:from-gold-light hover:to-gold text-navy-dark font-bold px-4 py-2.5 rounded-xl shadow-lg transition transform hover:scale-105 flex items-center space-x-2">
                     <i class="fa-solid fa-cart-shopping text-lg"></i>
-                    <span id="cartBadge" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center shadow">0</span>
+                    <span class="text-sm font-extrabold hidden sm:inline">Cart</span>
+                    <span id="cartBadge" class="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-black w-6 h-6 rounded-full flex items-center justify-center shadow-md border-2 border-navy-dark">0</span>
                 </button>
 
-                <button id="langToggleBtn" onclick="toggleLanguage()" class="bg-gold hover:bg-gold-light text-navy-dark font-bold px-4 py-2.5 rounded-xl shadow-md transition transform hover:scale-105 flex items-center space-x-2 rtl:space-x-reverse">
-                    <i class="fa-solid fa-globe"></i>
-                    <span id="langLabel" class="text-sm font-bold">العربية</span>
-                </button>
                 <button onclick="toggleMobileMenu()" class="md:hidden text-gold text-2xl p-2 focus:outline-none">
                     <i class="fa-solid fa-bars"></i>
                 </button>
@@ -110,12 +106,12 @@
 
         <!-- Mobile Nav Menu -->
         <div id="mobileMenu" class="hidden md:hidden bg-navy-dark border-t border-gold/20 px-6 py-4 space-y-3">
-            <a href="#home" onclick="toggleMobileMenu()" class="block text-gray-200 hover:text-gold py-2 text-lg lang-nav-home" data-en="Home" data-ar="الرئيسية">Home</a>
-            <a href="#about" onclick="toggleMobileMenu()" class="block text-gray-200 hover:text-gold py-2 text-lg lang-nav-about" data-en="About Us" data-ar="من نحن">About Us</a>
-            <a href="#menu" onclick="toggleMobileMenu()" class="block text-gray-200 hover:text-gold py-2 text-lg lang-nav-menu" data-en="Our Menu" data-ar="قائمة الطعام">Our Menu</a>
-            <a href="#reviews" onclick="toggleMobileMenu()" class="block text-gray-200 hover:text-gold py-2 text-lg lang-nav-reviews" data-en="Google Reviews" data-ar="تقييمات جوجل">Google Reviews</a>
-            <a href="#services" onclick="toggleMobileMenu()" class="block text-gray-200 hover:text-gold py-2 text-lg lang-nav-services" data-en="Services & Info" data-ar="الخدمات والمعلومات">Services & Info</a>
-            <a href="#contact" onclick="toggleMobileMenu()" class="block text-gray-200 hover:text-gold py-2 text-lg lang-nav-contact" data-en="Contact" data-ar="اتصل بنا">Contact</a>
+            <a href="#home" onclick="toggleMobileMenu()" class="block text-gray-200 hover:text-gold py-2 text-lg">Home</a>
+            <a href="#about" onclick="toggleMobileMenu()" class="block text-gray-200 hover:text-gold py-2 text-lg">About Us</a>
+            <a href="#menu" onclick="toggleMobileMenu()" class="block text-gray-200 hover:text-gold py-2 text-lg">Our Menu</a>
+            <a href="#reviews" onclick="toggleMobileMenu()" class="block text-gray-200 hover:text-gold py-2 text-lg">Google Reviews</a>
+            <a href="#services" onclick="toggleMobileMenu()" class="block text-gray-200 hover:text-gold py-2 text-lg">Services & Info</a>
+            <a href="#contact" onclick="toggleMobileMenu()" class="block text-gray-200 hover:text-gold py-2 text-lg">Contact</a>
         </div>
     </header>
 
@@ -126,9 +122,9 @@
             <div class="w-screen max-w-md bg-navy-dark border-l-2 border-gold flex flex-col shadow-2xl">
                 <!-- Cart Header -->
                 <div class="bg-navy px-6 py-5 border-b border-gold/20 flex items-center justify-between">
-                    <div class="flex items-center space-x-3 rtl:space-x-reverse text-gold">
+                    <div class="flex items-center space-x-3 text-gold">
                         <i class="fa-solid fa-cart-shopping text-2xl"></i>
-                        <h3 class="text-2xl font-bold font-display" data-en="Your Shopping Cart" data-ar="سلة مشترياتك">Your Shopping Cart</h3>
+                        <h3 class="text-2xl font-bold font-display">Your Shopping Cart</h3>
                     </div>
                     <button onclick="toggleCartDrawer()" class="text-gray-400 hover:text-white text-2xl bg-white/5 hover:bg-white/10 w-10 h-10 rounded-full flex items-center justify-center transition">
                         <i class="fa-solid fa-xmark"></i>
@@ -141,12 +137,12 @@
                 <!-- Cart Footer & Checkout -->
                 <div class="bg-navy p-6 border-t border-gold/20 space-y-4">
                     <div class="flex justify-between items-center text-lg font-bold text-white">
-                        <span data-en="Total Amount:" data-ar="المجموع الإجمالي:">Total Amount:</span>
+                        <span>Total Amount:</span>
                         <span id="cartTotalPrice" class="text-gold text-2xl">$0.00</span>
                     </div>
-                    <button onclick="checkoutCart()" class="w-full bg-gold hover:bg-gold-light text-navy-dark font-extrabold text-lg py-4 rounded-xl shadow-xl transition transform hover:scale-105 flex items-center justify-center space-x-2 rtl:space-x-reverse">
+                    <button onclick="checkoutCart()" class="w-full bg-gold hover:bg-gold-light text-navy-dark font-extrabold text-lg py-4 rounded-xl shadow-xl transition transform hover:scale-105 flex items-center justify-center space-x-2">
                         <i class="fa-solid fa-bag-shopping"></i>
-                        <span data-en="Proceed to Checkout" data-ar="إتمام الطلب الآن">Proceed to Checkout</span>
+                        <span>Proceed to Checkout</span>
                     </button>
                 </div>
             </div>
@@ -155,20 +151,20 @@
 
     <section id="home" class="relative overflow-hidden bg-navy py-16 sm:py-24 border-b border-gold/10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-            <span class="inline-block px-4 py-1.5 rounded-full bg-gold/10 text-gold border border-gold/30 text-sm font-semibold tracking-wider uppercase mb-6 animate-pulse lang-hero-badge" data-en="Authentic Canadian Diner & Poutine House" data-ar="مطعم كندي أصيل وبوتين فاخر">Authentic Canadian Diner & Poutine House</span>
+            <span class="inline-block px-4 py-1.5 rounded-full bg-gold/10 text-gold border border-gold/30 text-sm font-semibold tracking-wider uppercase mb-6 animate-pulse">Authentic Canadian Diner & Poutine House</span>
             <h2 class="text-4xl sm:text-6xl lg:text-7xl font-display font-bold text-white mb-6 leading-tight">
-                <span class="lang-hero-title1" data-en="Welcome to" data-ar="أهلاً بكم في">Welcome to</span> <span class="text-gold" id="heroRestaurantName">Chez Claudette</span>
+                Welcome to <span class="text-gold" id="heroRestaurantName">Chez Claudette</span>
             </h2>
-            <p class="max-w-2xl mx-auto text-lg sm:text-xl text-gray-300 mb-10 lang-hero-desc" data-en="Experience legendary poutines, sizzling breakfasts, comforting casseroles, and hearty classics prepared with passion since decades." data-ar="استمتع بأشهى أطباق البوتين الأسطورية، الإفطار الساخن، والوجبات التقليدية المحضرة بكل شغف منذ عقود.">Experience legendary poutines, sizzling breakfasts, comforting casseroles, and hearty classics prepared with passion since decades.</p>
+            <p class="max-w-2xl mx-auto text-lg sm:text-xl text-gray-300 mb-10">Experience legendary poutines, sizzling breakfasts, comforting casseroles, and hearty classics prepared with passion since decades.</p>
             <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
-                <a href="#menu" class="w-full sm:w-auto bg-gold hover:bg-gold-light text-navy-dark font-extrabold text-lg px-8 py-4 rounded-xl shadow-xl transition transform hover:scale-105 text-center lang-hero-btn1" data-en="Explore Our Menu" data-ar="استعرض قائمة الطعام">Explore Our Menu</a>
-                <a href="#contact" class="w-full sm:w-auto bg-transparent hover:bg-white/10 text-gold border-2 border-gold font-bold text-lg px-8 py-3.5 rounded-xl transition text-center lang-hero-btn2" data-en="Visit & Contact" data-ar="زورنا وتواصل معنا">Visit & Contact</a>
+                <a href="#menu" class="w-full sm:w-auto bg-gold hover:bg-gold-light text-navy-dark font-extrabold text-lg px-8 py-4 rounded-xl shadow-xl transition transform hover:scale-105 text-center">Explore Our Menu</a>
+                <a href="#contact" class="w-full sm:w-auto bg-transparent hover:bg-white/10 text-gold border-2 border-gold font-bold text-lg px-8 py-3.5 rounded-xl transition text-center">Visit & Contact</a>
             </div>
         </div>
 
-        <!-- Automatic Moving Image Slider (No Arrows) -->
+        <!-- Automatic Moving Image Slider -->
         <div class="mt-16 relative overflow-hidden w-full py-4 bg-navy-dark/60 border-y border-gold/20">
-            <div id="sliderContainer" class="animate-slider flex space-x-6 rtl:space-x-reverse px-3">
+            <div id="sliderContainer" class="animate-slider flex space-x-6 px-3">
                 <!-- Slider items rendered dynamically -->
             </div>
         </div>
@@ -178,17 +174,17 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <div>
-                    <span class="text-gold font-bold tracking-widest uppercase text-sm lang-about-subtitle" data-en="Our Heritage & Tradition" data-ar="تراثنا وعراقتنا">Our Heritage & Tradition</span>
-                    <h3 class="text-3xl sm:text-4xl font-display font-bold text-white mt-2 mb-6 lang-about-title" data-en="A Beloved Tradition of Great Taste & Warm Hospitality" data-ar="تقاليد محبوبة من المذاق الرائع وحسن الضيافة">A Beloved Tradition of Great Taste & Warm Hospitality</h3>
-                    <p class="text-gray-300 text-lg mb-6 leading-relaxed lang-about-desc1" data-en="Restaurant Chez Claudette has been serving comforting local favorites with unmatched quality and friendly warmth. From our signature golden poutines dripping with rich gravy and fresh cheese curds to hearty breakfasts and classic casseroles, every dish tells a story of authentic culinary dedication." data-ar="يقدم مطعم شيز كلوديت الأطباق المحلية المفضلة بجودة لا مثيل لها ودفء ترحيبي. من أطباق البوتين الذهبية الغنية بالصلصة وجبن القريش الطازج إلى وجبات الإفطار الشهية والأطباق الساخنة، كل طبق يروي قصة تفاني طهي أصيل.">Restaurant Chez Claudette has been serving comforting local favorites with unmatched quality and friendly warmth. From our signature golden poutines dripping with rich gravy and fresh cheese curds to hearty breakfasts and classic casseroles, every dish tells a story of authentic culinary dedication.</p>
+                    <span class="text-gold font-bold tracking-widest uppercase text-sm">Our Heritage & Tradition</span>
+                    <h3 class="text-3xl sm:text-4xl font-display font-bold text-white mt-2 mb-6">A Beloved Tradition of Great Taste & Warm Hospitality</h3>
+                    <p class="text-gray-300 text-lg mb-6 leading-relaxed">Restaurant Chez Claudette has been serving comforting local favorites with unmatched quality and friendly warmth. From our signature golden poutines dripping with rich gravy and fresh cheese curds to hearty breakfasts and classic casseroles, every dish tells a story of authentic culinary dedication.</p>
                     <div class="grid grid-cols-2 gap-6 mt-8">
                         <div class="bg-navy p-6 rounded-2xl border border-gold/20 shadow-lg">
                             <h4 class="text-3xl font-extrabold text-gold mb-1">100%</h4>
-                            <p class="text-gray-300 font-medium" data-en="Fresh Ingredients" data-ar="مكونات طازجة 100%">Fresh Ingredients</p>
+                            <p class="text-gray-300 font-medium">Fresh Ingredients</p>
                         </div>
                         <div class="bg-navy p-6 rounded-2xl border border-gold/20 shadow-lg">
                             <h4 class="text-3xl font-extrabold text-gold mb-1">24/7</h4>
-                            <p class="text-gray-300 font-medium" data-en="Authentic Taste" data-ar="مذاق أصيل دائماً">Authentic Taste</p>
+                            <p class="text-gray-300 font-medium">Authentic Taste</p>
                         </div>
                     </div>
                 </div>
@@ -198,7 +194,7 @@
                     </div>
                     <div class="absolute -bottom-6 -left-6 bg-gold text-navy-dark p-6 rounded-2xl shadow-2xl hidden sm:block border-2 border-white/20">
                         <p class="font-display font-bold text-2xl">Chez Claudette</p>
-                        <p class="text-sm font-semibold tracking-wider uppercase" data-en="Since Decades of Excellence" data-ar="عقود من التميز العريق">Since Decades of Excellence</p>
+                        <p class="text-sm font-semibold tracking-wider uppercase">Since Decades of Excellence</p>
                     </div>
                 </div>
             </div>
@@ -208,9 +204,9 @@
     <section id="menu" class="py-20 bg-navy border-t border-gold/10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-3xl mx-auto mb-16">
-                <span class="text-gold font-bold tracking-widest uppercase text-sm lang-menu-subtitle" data-en="Discover Our Offerings" data-ar="استكشف قوائم طعامنا">Discover Our Offerings</span>
-                <h3 class="text-3xl sm:text-5xl font-display font-bold text-white mt-2 mb-4 lang-menu-title" data-en="Our Special Menu Categories" data-ar="فئات قائمتنا المميزة">Our Special Menu Categories</h3>
-                <p class="text-gray-300 text-lg lang-menu-desc" data-en="Explore our extensive selection categorized for your cravings, crafted with the authentic spirit of Chez Claudette." data-ar="تصفح تشكيلتنا الواسعة المصممة لتلبي كافة رغباتك بروح شيز كلوديت الأصيلة.">Explore our extensive selection categorized for your cravings, crafted with the authentic spirit of Chez Claudette.</p>
+                <span class="text-gold font-bold tracking-widest uppercase text-sm">Discover Our Offerings</span>
+                <h3 class="text-3xl sm:text-5xl font-display font-bold text-white mt-2 mb-4">Our Special Menu Categories</h3>
+                <p class="text-gray-300 text-lg">Explore our extensive selection categorized for your cravings, crafted with the authentic spirit of Chez Claudette.</p>
             </div>
 
             <!-- Category Tabs Navigation -->
@@ -220,7 +216,7 @@
 
             <!-- Menu Items Container -->
             <div id="menuItemsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Dynamically filled items with product images -->
+                <!-- Dynamically filled items -->
             </div>
         </div>
     </section>
@@ -229,12 +225,12 @@
     <section id="reviews" class="py-20 bg-navy-dark border-t border-gold/20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-3xl mx-auto mb-16">
-                <div class="inline-flex items-center space-x-2 rtl:space-x-reverse bg-gold/10 px-4 py-2 rounded-full border border-gold/30 text-gold mb-4">
+                <div class="inline-flex items-center space-x-2 bg-gold/10 px-4 py-2 rounded-full border border-gold/30 text-gold mb-4">
                     <i class="fa-brands fa-google text-lg"></i>
-                    <span class="font-bold text-sm" data-en="Verified Google Maps Reviews" data-ar="تقييمات موثقة من خرائط جوجل">Verified Google Maps Reviews</span>
+                    <span class="font-bold text-sm">Verified Google Maps Reviews</span>
                 </div>
-                <h3 class="text-3xl sm:text-5xl font-display font-bold text-white mb-4" data-en="What Our Customers Say" data-ar="ما يقوله عملاؤنا عنا">What Our Customers Say</h3>
-                <p class="text-gray-300 text-lg" data-en="Read authentic experiences and reviews shared by our wonderful guests on Google Maps." data-ar="اقرأ التجارب والتقييمات الحقيقية التي مشاركتها من قبل ضيوفنا الكرام على خرائط جوجل.">Read authentic experiences and reviews shared by our wonderful guests on Google Maps.</p>
+                <h3 class="text-3xl sm:text-5xl font-display font-bold text-white mb-4">What Our Customers Say</h3>
+                <p class="text-gray-300 text-lg">Read authentic experiences and reviews shared by our wonderful guests on Google Maps.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -242,16 +238,16 @@
                 <div class="bg-navy p-6 rounded-3xl border border-gold/20 shadow-xl flex flex-col justify-between">
                     <div>
                         <div class="flex items-center justify-between mb-4">
-                            <div class="flex items-center space-x-3 rtl:space-x-reverse">
+                            <div class="flex items-center space-x-3">
                                 <div class="w-12 h-12 rounded-full bg-emerald-600 text-white font-bold text-lg flex items-center justify-center shadow-md">RG</div>
                                 <div>
                                     <h4 class="font-bold text-white text-base">RG</h4>
-                                    <span class="text-xs text-gold/80" data-en="Local Guide &bull; 331 reviews" data-ar="مرشد محلي &bull; 331 تقييم">Local Guide &bull; 331 reviews</span>
+                                    <span class="text-xs text-gold/80">Local Guide &bull; 331 reviews</span>
                                 </div>
                             </div>
                             <div class="text-gold flex space-x-0.5 text-sm"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
                         </div>
-                        <p class="text-gray-300 text-sm sm:text-base mb-4 leading-relaxed" data-en="&ldquo;This was an excellent excellent experience. We stopped by for lunch on our way out of Mtl and had the best time grabbing brunch here...&rdquo;" data-ar="&ldquo;كانت تجربة ممتازة جداً. توقفنا لتناول الغداء في طريقنا خارج مونتريال وقضينا وقتاً ممتعاً للغاية...&rdquo;">&ldquo;This was an excellent excellent experience...&rdquo;</p>
+                        <p class="text-gray-300 text-sm sm:text-base mb-4 leading-relaxed">&ldquo;This was an excellent excellent experience. We stopped by for lunch on our way out of Mtl and had the best time grabbing brunch here...&rdquo;</p>
                     </div>
                     <div class="border-t border-gold/10 pt-4 flex items-center justify-between text-xs text-gray-400">
                         <span class="bg-gold/10 text-gold px-2.5 py-1 rounded-md">Dine-in &bull; Brunch</span>
@@ -262,16 +258,16 @@
                 <div class="bg-navy p-6 rounded-3xl border border-gold/20 shadow-xl flex flex-col justify-between">
                     <div>
                         <div class="flex items-center justify-between mb-4">
-                            <div class="flex items-center space-x-3 rtl:space-x-reverse">
+                            <div class="flex items-center space-x-3">
                                 <div class="w-12 h-12 rounded-full bg-cyan-600 text-white font-bold text-lg flex items-center justify-center shadow-md">MM</div>
                                 <div>
                                     <h4 class="font-bold text-white text-base">Mon M.</h4>
-                                    <span class="text-xs text-gold/80" data-en="Local Guide &bull; 175 reviews" data-ar="مرشد محلي &bull; 175 تقييم">Local Guide &bull; 175 reviews</span>
+                                    <span class="text-xs text-gold/80">Local Guide &bull; 175 reviews</span>
                                 </div>
                             </div>
                             <div class="text-gold flex space-x-0.5 text-sm"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i></div>
                         </div>
-                        <p class="text-gray-300 text-sm sm:text-base mb-4 leading-relaxed" data-en="&ldquo;Restaurant Chez Claudette is one of the hidden spots for authentic Québécois comfort food in Montreal...&rdquo;" data-ar="&ldquo;مطعم شيز كلوديت هو أحد الأماكن الخفية الرائعة للطعام الكيبيكي التقليدي الأصيل...&rdquo;">&ldquo;Restaurant Chez Claudette is one of the hidden spots...&rdquo;</p>
+                        <p class="text-gray-300 text-sm sm:text-base mb-4 leading-relaxed">&ldquo;Restaurant Chez Claudette is one of the hidden spots for authentic Québécois comfort food in Montreal...&rdquo;</p>
                     </div>
                     <div class="border-t border-gold/10 pt-4 flex items-center justify-between text-xs text-gray-400">
                         <span class="bg-gold/10 text-gold px-2.5 py-1 rounded-md">Dine-in &bull; Diner</span>
@@ -282,16 +278,16 @@
                 <div class="bg-navy p-6 rounded-3xl border border-gold/20 shadow-xl flex flex-col justify-between">
                     <div>
                         <div class="flex items-center justify-between mb-4">
-                            <div class="flex items-center space-x-3 rtl:space-x-reverse">
+                            <div class="flex items-center space-x-3">
                                 <div class="w-12 h-12 rounded-full bg-amber-600 text-white font-bold text-lg flex items-center justify-center shadow-md">AC</div>
                                 <div>
                                     <h4 class="font-bold text-white text-base">Annick Chenard</h4>
-                                    <span class="text-xs text-gold/80" data-en="Local Guide &bull; 10 reviews" data-ar="مرشد محلي &bull; 10 تقييمات">Local Guide &bull; 10 reviews</span>
+                                    <span class="text-xs text-gold/80">Local Guide &bull; 10 reviews</span>
                                 </div>
                             </div>
                             <div class="text-gold flex space-x-0.5 text-sm"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i></div>
                         </div>
-                        <p class="text-gray-300 text-sm sm:text-base mb-4 leading-relaxed" data-en="&ldquo;I went for a poutine at lunchtime. The fries are perfect but it stops there...&rdquo;" data-ar="&ldquo;ذهبت لتناول البوتين وقت الغداء. البطاطس مقرمشة ومثالية...&rdquo;">&ldquo;I went for a poutine at lunchtime...&rdquo;</p>
+                        <p class="text-gray-300 text-sm sm:text-base mb-4 leading-relaxed">&ldquo;I went for a poutine at lunchtime. The fries are perfect but it stops there...&rdquo;</p>
                     </div>
                     <div class="border-t border-gold/10 pt-4 flex items-center justify-between text-xs text-gray-400">
                         <span class="bg-gold/10 text-gold px-2.5 py-1 rounded-md">Lunch &bull; Poutine</span>
@@ -306,98 +302,98 @@
     <section id="services" class="py-20 bg-navy border-t border-gold/20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-3xl mx-auto mb-16">
-                <span class="text-gold font-bold tracking-widest uppercase text-sm" data-en="Features & Offerings" data-ar="المميزات والخدمات">Features & Offerings</span>
-                <h3 class="text-3xl sm:text-5xl font-display font-bold text-white mt-2 mb-4" data-en="Services & Amenities" data-ar="خدماتنا ووسائل الراحة">Services & Amenities</h3>
-                <p class="text-gray-300 text-lg" data-en="Everything you need to know about our dining experience, payment options, and atmosphere." data-ar="كل ما تحتاج معرفته عن تجربة تناول الطعام لدينا، خيارات الدفع، والأجواء المميزة.">Everything you need to know about our dining experience, payment options, and atmosphere.</p>
+                <span class="text-gold font-bold tracking-widest uppercase text-sm">Features & Offerings</span>
+                <h3 class="text-3xl sm:text-5xl font-display font-bold text-white mt-2 mb-4">Services & Amenities</h3>
+                <p class="text-gray-300 text-lg">Everything you need to know about our dining experience, payment options, and atmosphere.</p>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- 1. Dining Services -->
                 <div class="bg-navy-dark p-6 rounded-2xl border border-gold/20 shadow-xl">
-                    <div class="flex items-center space-x-3 rtl:space-x-reverse text-gold text-xl font-bold mb-4">
+                    <div class="flex items-center space-x-3 text-gold text-xl font-bold mb-4">
                         <i class="fa-solid fa-utensils"></i>
-                        <h4 class="text-white" data-en="Dining Services" data-ar="خدمات المطعم">Dining Services</h4>
+                        <h4 class="text-white">Dining Services</h4>
                     </div>
                     <ul class="space-y-2 text-gray-300 text-sm sm:text-base">
-                        <li class="flex items-center space-x-2 rtl:space-x-reverse"><i class="fa-solid fa-check text-gold"></i><span data-en="Breakfast" data-ar="إفطار">Breakfast</span></li>
-                        <li class="flex items-center space-x-2 rtl:space-x-reverse"><i class="fa-solid fa-check text-gold"></i><span data-en="Brunch" data-ar="برنش">Brunch</span></li>
-                        <li class="flex items-center space-x-2 rtl:space-x-reverse"><i class="fa-solid fa-check text-gold"></i><span data-en="Lunch" data-ar="غداء (ديجيهنر)">Lunch</span></li>
-                        <li class="flex items-center space-x-2 rtl:space-x-reverse"><i class="fa-solid fa-check text-gold"></i><span data-en="Dinner" data-ar="عشاء (دينير)">Dinner</span></li>
-                        <li class="flex items-center space-x-2 rtl:space-x-reverse"><i class="fa-solid fa-check text-gold"></i><span data-en="Catering" data-ar="خدمة تقديم الطعام (ترابور)">Catering</span></li>
-                        <li class="flex items-center space-x-2 rtl:space-x-reverse"><i class="fa-solid fa-check text-gold"></i><span data-en="Counter Service" data-ar="خدمة المنضدة">Counter Service</span></li>
-                        <li class="flex items-center space-x-2 rtl:space-x-reverse"><i class="fa-solid fa-check text-gold"></i><span data-en="Desserts" data-ar="حلويات">Desserts</span></li>
-                        <li class="flex items-center space-x-2 rtl:space-x-reverse"><i class="fa-solid fa-check text-gold"></i><span data-en="Seating" data-ar="أماكن جلوس">Seating</span></li>
-                        <li class="flex items-center space-x-2 rtl:space-x-reverse"><i class="fa-solid fa-check text-gold"></i><span data-en="Table Service" data-ar="خدمة الطاولة">Table Service</span></li>
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-gold"></i><span>Breakfast</span></li>
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-gold"></i><span>Brunch</span></li>
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-gold"></i><span>Lunch</span></li>
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-gold"></i><span>Dinner</span></li>
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-gold"></i><span>Catering</span></li>
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-gold"></i><span>Counter Service</span></li>
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-gold"></i><span>Desserts</span></li>
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-gold"></i><span>Seating</span></li>
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-gold"></i><span>Table Service</span></li>
                     </ul>
                 </div>
 
                 <!-- 2. Service Options & Amenities -->
                 <div class="bg-navy-dark p-6 rounded-2xl border border-gold/20 shadow-xl">
-                    <div class="flex items-center space-x-3 rtl:space-x-reverse text-gold text-xl font-bold mb-4">
+                    <div class="flex items-center space-x-3 text-gold text-xl font-bold mb-4">
                         <i class="fa-solid fa-bell-concierge"></i>
-                        <h4 class="text-white" data-en="Service Options & Amenities" data-ar="خيارات الخدمة والمرافق">Service Options & Amenities</h4>
+                        <h4 class="text-white">Service Options & Amenities</h4>
                     </div>
                     <ul class="space-y-2 text-gray-300 text-sm sm:text-base">
-                        <li class="flex items-center space-x-2 rtl:space-x-reverse"><i class="fa-solid fa-check text-gold"></i><span data-en="Outdoor Terrace" data-ar="جلسات خارجية (تراس)">Outdoor Terrace</span></li>
-                        <li class="flex items-center space-x-2 rtl:space-x-reverse"><i class="fa-solid fa-check text-gold"></i><span data-en="Home Delivery" data-ar="توصيل للمنازل">Home Delivery</span></li>
-                        <li class="flex items-center space-x-2 rtl:space-x-reverse"><i class="fa-solid fa-check text-gold"></i><span data-en="Dine-in Service" data-ar="خدمات على الطاولة / بالمطعم">Dine-in Service</span></li>
-                        <li class="flex items-center space-x-2 rtl:space-x-reverse"><i class="fa-solid fa-check text-gold"></i><span data-en="Takeout Available" data-ar="بيع للسفري (Vente à emporter)">Takeout Available</span></li>
-                        <li class="flex items-center space-x-2 rtl:space-x-reverse"><i class="fa-solid fa-check text-gold"></i><span data-en="Restrooms" data-ar="دورات المياه (طواليت)">Restrooms</span></li>
-                        <li class="flex items-center space-x-2 rtl:space-x-reverse"><i class="fa-solid fa-check text-gold"></i><span data-en="Free Street Parking" data-ar="موقف سيارات مجاني في الشارع">Free Street Parking</span></li>
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-gold"></i><span>Outdoor Terrace</span></li>
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-gold"></i><span>Home Delivery</span></li>
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-gold"></i><span>Dine-in Service</span></li>
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-gold"></i><span>Takeout Available</span></li>
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-gold"></i><span>Restrooms</span></li>
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-gold"></i><span>Free Street Parking</span></li>
                     </ul>
                 </div>
 
                 <!-- 3. Atmosphere & Crowd -->
                 <div class="bg-navy-dark p-6 rounded-2xl border border-gold/20 shadow-xl">
-                    <div class="flex items-center space-x-3 rtl:space-x-reverse text-gold text-xl font-bold mb-4">
+                    <div class="flex items-center space-x-3 text-gold text-xl font-bold mb-4">
                         <i class="fa-solid fa-users"></i>
-                        <h4 class="text-white" data-en="Atmosphere & Crowd" data-ar="الأجواء والعملاء">Atmosphere & Crowd</h4>
+                        <h4 class="text-white">Atmosphere & Crowd</h4>
                     </div>
                     <ul class="space-y-2 text-gray-300 text-sm sm:text-base">
-                        <li class="flex items-center space-x-2 rtl:space-x-reverse"><i class="fa-solid fa-check text-gold"></i><span data-en="Casual & Relaxed Atmosphere" data-ar="أجواء مريحة وغير رسمية">Casual & Relaxed Atmosphere</span></li>
-                        <li class="flex items-center space-x-2 rtl:space-x-reverse"><i class="fa-solid fa-check text-gold"></i><span data-en="Pleasant Setting" data-ar="إطار ودي ولطيف">Pleasant Setting</span></li>
-                        <li class="flex items-center space-x-2 rtl:space-x-reverse"><i class="fa-solid fa-check text-gold"></i><span data-en="Students" data-ar="الطلاب">Students</span></li>
-                        <li class="flex items-center space-x-2 rtl:space-x-reverse"><i class="fa-solid fa-check text-gold"></i><span data-en="Groups" data-ar="المجموعات">Groups</span></li>
-                        <li class="flex items-center space-x-2 rtl:space-x-reverse"><i class="fa-solid fa-check text-gold"></i><span data-en="Tourists" data-ar="السياح">Tourists</span></li>
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-gold"></i><span>Casual & Relaxed Atmosphere</span></li>
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-gold"></i><span>Pleasant Setting</span></li>
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-gold"></i><span>Students</span></li>
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-gold"></i><span>Groups</span></li>
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-gold"></i><span>Tourists</span></li>
                     </ul>
                 </div>
 
                 <!-- 4. Planning & Reservations -->
                 <div class="bg-navy-dark p-6 rounded-2xl border border-gold/20 shadow-xl">
-                    <div class="flex items-center space-x-3 rtl:space-x-reverse text-gold text-xl font-bold mb-4">
+                    <div class="flex items-center space-x-3 text-gold text-xl font-bold mb-4">
                         <i class="fa-solid fa-calendar-check"></i>
-                        <h4 class="text-white" data-en="Planning & Reservations" data-ar="التخطيط والحجوزات">Planning & Reservations</h4>
+                        <h4 class="text-white">Planning & Reservations</h4>
                     </div>
                     <ul class="space-y-2 text-gray-300 text-sm sm:text-base">
-                        <li class="flex items-center space-x-2 rtl:space-x-reverse"><i class="fa-solid fa-check text-gold"></i><span data-en="Reservations Accepted" data-ar="الحجوزات مقبولة">Reservations Accepted</span></li>
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-gold"></i><span>Reservations Accepted</span></li>
                     </ul>
                 </div>
 
                 <!-- 5. Offer & Drinks -->
                 <div class="bg-navy-dark p-6 rounded-2xl border border-gold/20 shadow-xl">
-                    <div class="flex items-center space-x-3 rtl:space-x-reverse text-gold text-xl font-bold mb-4">
+                    <div class="flex items-center space-x-3 text-gold text-xl font-bold mb-4">
                         <i class="fa-solid fa-martini-glass-citrus"></i>
-                        <h4 class="text-white" data-en="Offer & Drinks" data-ar="العروض والمشروبات">Offer & Drinks</h4>
+                        <h4 class="text-white">Offer & Drinks</h4>
                     </div>
                     <ul class="space-y-2 text-gray-300 text-sm sm:text-base">
-                        <li class="flex items-center space-x-2 rtl:space-x-reverse"><i class="fa-solid fa-check text-gold"></i><span data-en="Alcohol & Beer" data-ar="مشروبات كحولية وبيرة">Alcohol & Beer</span></li>
-                        <li class="flex items-center space-x-2 rtl:space-x-reverse"><i class="fa-solid fa-check text-gold"></i><span data-en="Coffees" data-ar="قهوة">Coffees</span></li>
-                        <li class="flex items-center space-x-2 rtl:space-x-reverse"><i class="fa-solid fa-check text-gold"></i><span data-en="Vegetarian Options" data-ar="خيارات مناسبة للنباتيين">Vegetarian Options</span></li>
-                        <li class="flex items-center space-x-2 rtl:space-x-reverse"><i class="fa-solid fa-check text-gold"></i><span data-en="Small Plates to Share" data-ar="أطباق صغيرة للمشاركة">Small Plates to Share</span></li>
-                        <li class="flex items-center space-x-2 rtl:space-x-reverse"><i class="fa-solid fa-check text-gold"></i><span data-en="Late-Night Food" data-ar="وجبات متأخرة في الليل">Late-Night Food</span></li>
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-gold"></i><span>Alcohol & Beer</span></li>
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-gold"></i><span>Coffees</span></li>
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-gold"></i><span>Vegetarian Options</span></li>
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-gold"></i><span>Small Plates to Share</span></li>
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-gold"></i><span>Late-Night Food</span></li>
                     </ul>
                 </div>
 
                 <!-- 6. Payments & Accessibility -->
                 <div class="bg-navy-dark p-6 rounded-2xl border border-gold/20 shadow-xl">
-                    <div class="flex items-center space-x-3 rtl:space-x-reverse text-gold text-xl font-bold mb-4">
+                    <div class="flex items-center space-x-3 text-gold text-xl font-bold mb-4">
                         <i class="fa-solid fa-credit-card"></i>
-                        <h4 class="text-white" data-en="Payments & Accessibility" data-ar="طرق الدفع وإمكانية الوصول">Payments & Accessibility</h4>
+                        <h4 class="text-white">Payments & Accessibility</h4>
                     </div>
                     <ul class="space-y-2 text-gray-300 text-sm sm:text-base">
-                        <li class="flex items-center space-x-2 rtl:space-x-reverse"><i class="fa-solid fa-check text-gold"></i><span data-en="Credit Cards & Debit Cards" data-ar="بطاقات الائتمان والخصم">Credit Cards & Debit Cards</span></li>
-                        <li class="flex items-center space-x-2 rtl:space-x-reverse"><i class="fa-solid fa-check text-gold"></i><span data-en="NFC Mobile Payments" data-ar="الدفع عبر الهاتف المحمول NFC">NFC Mobile Payments</span></li>
-                        <li class="flex items-center space-x-2 rtl:space-x-reverse text-gray-400"><i class="fa-solid fa-xmark text-red-400"></i><span data-en="Wheelchair-accessible entrance" data-ar="مدخل غير مجهز للكراسي المتحركة">Wheelchair-accessible entrance</span></li>
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-gold"></i><span>Credit Cards & Debit Cards</span></li>
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-gold"></i><span>NFC Mobile Payments</span></li>
+                        <li class="flex items-center space-x-2 text-gray-400"><i class="fa-solid fa-xmark text-red-400"></i><span>Wheelchair-accessible entrance</span></li>
                     </ul>
                 </div>
             </div>
@@ -409,25 +405,25 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
                 <div>
-                    <span class="text-gold font-bold tracking-widest uppercase text-sm" data-en="Get In Touch & Schedule" data-ar="تواصل معنا وأوقات العمل">Get In Touch & Schedule</span>
-                    <h3 class="text-3xl sm:text-4xl font-display font-bold text-white mt-2 mb-6" data-en="Visit Us Or Place an Order" data-ar="زورنا أو اطلب وجبتك المفضلة">Visit Us Or Place an Order</h3>
+                    <span class="text-gold font-bold tracking-widest uppercase text-sm">Get In Touch & Schedule</span>
+                    <h3 class="text-3xl sm:text-4xl font-display font-bold text-white mt-2 mb-6">Visit Us Or Place an Order</h3>
                     
                     <div class="space-y-6">
-                        <div class="flex items-start space-x-4 rtl:space-x-reverse bg-navy p-5 rounded-2xl border border-gold/20 shadow-md">
+                        <div class="flex items-start space-x-4 bg-navy p-5 rounded-2xl border border-gold/20 shadow-md">
                             <div class="w-12 h-12 rounded-xl bg-gold text-navy-dark flex items-center justify-center text-xl flex-shrink-0">
                                 <i class="fa-solid fa-location-dot"></i>
                             </div>
                             <div>
-                                <h4 class="font-bold text-white text-lg" data-en="Full Address" data-ar="العنوان الكامل">Full Address</h4>
+                                <h4 class="font-bold text-white text-lg">Full Address</h4>
                                 <p class="text-gray-300 font-medium">351 Avenue Laurier Est, Montréal, QC H2T 1G7, Canada</p>
                             </div>
                         </div>
-                        <div class="flex items-start space-x-4 rtl:space-x-reverse bg-navy p-5 rounded-2xl border border-gold/20 shadow-md">
+                        <div class="flex items-start space-x-4 bg-navy p-5 rounded-2xl border border-gold/20 shadow-md">
                             <div class="w-12 h-12 rounded-xl bg-gold text-navy-dark flex items-center justify-center text-xl flex-shrink-0">
                                 <i class="fa-solid fa-phone"></i>
                             </div>
                             <div>
-                                <h4 class="font-bold text-white text-lg" data-en="Phone Number" data-ar="رقم الهاتف">Phone Number</h4>
+                                <h4 class="font-bold text-white text-lg">Phone Number</h4>
                                 <p class="text-gray-300 font-medium" dir="ltr">+1 514-279-5173</p>
                             </div>
                         </div>
@@ -435,41 +431,41 @@
                 </div>
 
                 <div class="bg-navy p-8 sm:p-10 rounded-3xl border-2 border-gold/30 shadow-2xl">
-                    <h4 class="text-2xl font-display font-bold text-white mb-6" data-en="Send Us a Message" data-ar="أرسل لنا رسالة">Send Us a Message</h4>
+                    <h4 class="text-2xl font-display font-bold text-white mb-6">Send Us a Message</h4>
                     <form onsubmit="handleFormSubmit(event)" class="space-y-6">
                         <div>
-                            <label class="block text-sm font-semibold text-gray-300 mb-2" data-en="Your Name" data-ar="اسمك الكريم">Your Name</label>
+                            <label class="block text-sm font-semibold text-gray-300 mb-2">Your Name</label>
                             <input type="text" required class="w-full bg-navy-dark border border-gold/30 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold transition">
                         </div>
                         <div>
-                            <label class="block text-sm font-semibold text-gray-300 mb-2" data-en="Email Address" data-ar="البريد الإلكتروني">Email Address</label>
+                            <label class="block text-sm font-semibold text-gray-300 mb-2">Email Address</label>
                             <input type="email" required class="w-full bg-navy-dark border border-gold/30 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold transition">
                         </div>
                         <div>
-                            <label class="block text-sm font-semibold text-gray-300 mb-2" data-en="Your Message / Order Note" data-ar="رسالتك أو ملاحظة الطلب">Your Message / Order Note</label>
+                            <label class="block text-sm font-semibold text-gray-300 mb-2">Your Message / Order Note</label>
                             <textarea rows="4" required class="w-full bg-navy-dark border border-gold/30 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold transition"></textarea>
                         </div>
-                        <button type="submit" class="w-full bg-gold hover:bg-gold-light text-navy-dark font-extrabold text-lg py-4 rounded-xl shadow-xl transition transform hover:scale-105" data-en="Send Message Now" data-ar="إرسال الرسالة الآن">Send Message Now</button>
+                        <button type="submit" class="w-full bg-gold hover:bg-gold-light text-navy-dark font-extrabold text-lg py-4 rounded-xl shadow-xl transition transform hover:scale-105">Send Message Now</button>
                     </form>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- FOOTER WITH RESTAURANT NAME & COMPANY CREDIT -->
+    <!-- FOOTER WITH LOGO & COMPANY CREDIT -->
     <footer class="bg-navy border-t border-gold/20 py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
             
-            <!-- Restaurant Name Text Instead of Button -->
-            <div class="text-xl font-display font-bold text-gold" id="footerBrandName">
-                Restaurant Chez Claudette
+            <!-- Logo in Footer -->
+            <div id="footerBrandLogoContainer" class="flex items-center justify-center overflow-hidden flex-shrink-0">
+                <img src="1000143465_3.jpg" alt="Logo" class="h-14 w-auto object-contain drop-shadow-md">
             </div>
             
             <!-- Admin Control Panel Trigger Button -->
             <div>
-                <button onclick="openAdminModal()" class="bg-gold/20 hover:bg-gold hover:text-navy-dark text-gold border border-gold font-bold px-6 py-3 rounded-xl transition flex items-center space-x-2 rtl:space-x-reverse shadow-lg transform hover:scale-105">
+                <button onclick="openAdminModal()" class="bg-gold/20 hover:bg-gold hover:text-navy-dark text-gold border border-gold font-bold px-6 py-3 rounded-xl transition flex items-center space-x-2 shadow-lg transform hover:scale-105">
                     <i class="fa-solid fa-gears"></i>
-                    <span data-en="Admin Control Panel" data-ar="لوحة التحكم الإدارية">Admin Control Panel</span>
+                    <span>Admin Control Panel</span>
                 </button>
             </div>
 
@@ -488,22 +484,22 @@
                 <div class="w-16 h-16 rounded-full bg-gold/10 text-gold border border-gold/30 mx-auto flex items-center justify-center text-2xl mb-3">
                     <i class="fa-solid fa-lock"></i>
                 </div>
-                <h3 class="text-2xl font-bold font-display text-white" data-en="Admin Login" data-ar="تسجيل دخول الإدارة">Admin Login</h3>
+                <h3 class="text-2xl font-bold font-display text-white">Admin Login</h3>
                 <p class="text-xs text-gray-400 mt-1">Enter credentials (admin / adminnezar)</p>
             </div>
             <form onsubmit="handleAdminLogin(event)" class="space-y-4">
                 <div>
-                    <label class="block text-sm font-semibold text-gray-300 mb-1" data-en="Username" data-ar="اسم المستخدم">Username</label>
+                    <label class="block text-sm font-semibold text-gray-300 mb-1">Username</label>
                     <input type="text" id="loginUser" required class="w-full bg-navy border border-gold/30 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold" placeholder="admin">
                 </div>
                 <div>
-                    <label class="block text-sm font-semibold text-gray-300 mb-1" data-en="Password" data-ar="كلمة المرور">Password</label>
+                    <label class="block text-sm font-semibold text-gray-300 mb-1">Password</label>
                     <input type="password" id="loginPass" required class="w-full bg-navy border border-gold/30 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold" placeholder="adminnezar">
                 </div>
                 <div id="loginError" class="hidden text-red-400 text-xs text-center font-bold">Invalid username or password!</div>
                 <div class="flex gap-3 pt-2">
-                    <button type="button" onclick="closeLoginModal()" class="flex-1 bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 rounded-xl transition" data-en="Cancel" data-ar="إلغاء">Cancel</button>
-                    <button type="submit" class="flex-1 bg-gold hover:bg-gold-light text-navy-dark font-extrabold py-3 rounded-xl transition shadow-lg" data-en="Login" data-ar="دخول">Login</button>
+                    <button type="button" onclick="closeLoginModal()" class="flex-1 bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 rounded-xl transition">Cancel</button>
+                    <button type="submit" class="flex-1 bg-gold hover:bg-gold-light text-navy-dark font-extrabold py-3 rounded-xl transition shadow-lg">Login</button>
                 </div>
             </form>
         </div>
@@ -514,9 +510,9 @@
         <div class="bg-navy-dark border-2 border-gold rounded-3xl max-w-4xl w-full shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
             
             <div class="bg-navy px-6 py-5 border-b border-gold/20 flex justify-between items-center">
-                <div class="flex items-center space-x-3 rtl:space-x-reverse text-gold">
+                <div class="flex items-center space-x-3 text-gold">
                     <i class="fa-solid fa-gauge-high text-2xl"></i>
-                    <h3 class="text-2xl font-bold font-display" data-en="Admin Management Console" data-ar="لوحة التحكم الإدارية">Admin Management Console</h3>
+                    <h3 class="text-2xl font-bold font-display">Admin Management Console</h3>
                 </div>
                 <button onclick="closeAdminModal()" class="text-gray-400 hover:text-white text-2xl bg-white/5 hover:bg-white/10 w-10 h-10 rounded-full flex items-center justify-center transition">
                     <i class="fa-solid fa-xmark"></i>
@@ -525,13 +521,13 @@
 
             <div class="bg-navy/50 px-6 py-3 border-b border-gold/10 flex gap-3 overflow-x-auto">
                 <button onclick="switchAdminTab('brand')" id="admTabBtn_brand" class="px-5 py-2.5 rounded-xl font-bold text-sm transition bg-gold text-navy-dark shadow">
-                    <i class="fa-solid fa-store mr-1.5"></i> <span data-en="Branding & Logo" data-ar="الشعار والهوية">Branding & Logo</span>
+                    <i class="fa-solid fa-store mr-1.5"></i> <span>Branding & Logo</span>
                 </button>
                 <button onclick="switchAdminTab('slider')" id="admTabBtn_slider" class="px-5 py-2.5 rounded-xl font-bold text-sm transition bg-navy text-gray-300 hover:bg-gold/20 border border-gold/20">
-                    <i class="fa-solid fa-images mr-1.5"></i> <span data-en="Slider Images" data-ar="صور السلايدر">Slider Images</span>
+                    <i class="fa-solid fa-images mr-1.5"></i> <span>Slider Images</span>
                 </button>
                 <button onclick="switchAdminTab('menu')" id="admTabBtn_menu" class="px-5 py-2.5 rounded-xl font-bold text-sm transition bg-navy text-gray-300 hover:bg-gold/20 border border-gold/20">
-                    <i class="fa-solid fa-utensils mr-1.5"></i> <span data-en="Menu & Products" data-ar="الأطباق والمنتجات">Menu & Products</span>
+                    <i class="fa-solid fa-utensils mr-1.5"></i> <span>Menu & Products</span>
                 </button>
             </div>
 
@@ -539,18 +535,18 @@
                 
                 <!-- Tab 1: Branding & Interior Image -->
                 <div id="admTabContent_brand" class="space-y-4">
-                    <h4 class="text-lg font-bold text-gold border-b border-gold/20 pb-2" data-en="General Restaurant Branding & Interior" data-ar="الهوية العامة وصورة ديكور المطعم">General Restaurant Branding & Interior</h4>
+                    <h4 class="text-lg font-bold text-gold border-b border-gold/20 pb-2">General Restaurant Branding & Interior</h4>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-sm font-medium text-gray-300 mb-1.5" data-en="Restaurant Name" data-ar="اسم المطعم">Restaurant Name</label>
+                            <label class="block text-sm font-medium text-gray-300 mb-1.5">Restaurant Name</label>
                             <input type="text" id="adminRestName" class="w-full bg-navy border border-gold/30 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold">
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-300 mb-1.5" data-en="Logo Image URL" data-ar="رابط صورة الشعار (Logo URL)">Logo Image URL</label>
+                            <label class="block text-sm font-medium text-gray-300 mb-1.5">Logo Image URL</label>
                             <input type="text" id="adminLogoUrl" class="w-full bg-navy border border-gold/30 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold" placeholder="https://...">
                         </div>
                         <div class="sm:col-span-2">
-                            <label class="block text-sm font-medium text-gray-300 mb-1.5" data-en="Restaurant Interior Image URL" data-ar="رابط صورة ديكور المطعم (Restaurant Interior)">Restaurant Interior Image URL</label>
+                            <label class="block text-sm font-medium text-gray-300 mb-1.5">Restaurant Interior Image URL</label>
                             <input type="text" id="adminInteriorUrl" class="w-full bg-navy border border-gold/30 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold" placeholder="https://images.unsplash.com/...">
                         </div>
                     </div>
@@ -558,7 +554,7 @@
 
                 <!-- Tab 2: Slider -->
                 <div id="admTabContent_slider" class="hidden space-y-4">
-                    <h4 class="text-lg font-bold text-gold border-b border-gold/20 pb-2" data-en="Automatic Slider Banners" data-ar="بنرات السلايدر المتحرك">Automatic Slider Banners</h4>
+                    <h4 class="text-lg font-bold text-gold border-b border-gold/20 pb-2">Automatic Slider Banners</h4>
                     <div id="sliderInputsContainer" class="space-y-4"></div>
                 </div>
 
@@ -567,13 +563,13 @@
                     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-gold/20 pb-4">
                         <div class="flex gap-2 overflow-x-auto w-full sm:w-auto" id="adminCategoryTabs"></div>
                         <div class="flex gap-2 w-full sm:w-auto">
-                            <button onclick="addNewCategoryModal()" class="flex-1 sm:flex-none bg-gold/20 hover:bg-gold hover:text-navy-dark text-gold border border-gold px-4 py-2 rounded-xl text-xs font-bold transition flex items-center justify-center space-x-1 rtl:space-x-reverse">
+                            <button onclick="addNewCategoryModal()" class="flex-1 sm:flex-none bg-gold/20 hover:bg-gold hover:text-navy-dark text-gold border border-gold px-4 py-2 rounded-xl text-xs font-bold transition flex items-center justify-center space-x-1">
                                 <i class="fa-solid fa-folder-plus"></i>
-                                <span data-en="Add New Branch / Category" data-ar="إضافة فرع / قسم جديد">Add New Branch</span>
+                                <span>Add New Branch</span>
                             </button>
-                            <button onclick="addNewProductModal()" class="flex-1 sm:flex-none bg-gold text-navy-dark hover:bg-gold-light px-4 py-2 rounded-xl text-xs font-extrabold transition flex items-center justify-center space-x-1 rtl:space-x-reverse shadow-md">
+                            <button onclick="addNewProductModal()" class="flex-1 sm:flex-none bg-gold text-navy-dark hover:bg-gold-light px-4 py-2 rounded-xl text-xs font-extrabold transition flex items-center justify-center space-x-1 shadow-md">
                                 <i class="fa-solid fa-plus"></i>
-                                <span data-en="Add New Product" data-ar="إضافة منتج جديد">Add New Product</span>
+                                <span>Add New Product</span>
                             </button>
                         </div>
                     </div>
@@ -582,11 +578,11 @@
 
             </div>
 
-            <div class="bg-navy px-6 py-4 border-t border-gold/20 flex justify-end space-x-3 rtl:space-x-reverse">
-                <button onclick="closeAdminModal()" class="px-6 py-3 rounded-xl bg-gray-700 hover:bg-gray-600 text-white font-bold transition" data-en="Cancel" data-ar="إلغاء">Cancel</button>
-                <button onclick="saveAdminChanges()" class="px-8 py-3 rounded-xl bg-gold hover:bg-gold-light text-navy-dark font-extrabold transition shadow-lg flex items-center space-x-2 rtl:space-x-reverse">
+            <div class="bg-navy px-6 py-4 border-t border-gold/20 flex justify-end space-x-3">
+                <button onclick="closeAdminModal()" class="px-6 py-3 rounded-xl bg-gray-700 hover:bg-gray-600 text-white font-bold transition">Cancel</button>
+                <button onclick="saveAdminChanges()" class="px-8 py-3 rounded-xl bg-gold hover:bg-gold-light text-navy-dark font-extrabold transition shadow-lg flex items-center space-x-2">
                     <i class="fa-solid fa-check"></i>
-                    <span data-en="Save & Apply Changes" data-ar="حفظ وتطبيق التغييرات">Save & Apply Changes</span>
+                    <span>Save & Apply Changes</span>
                 </button>
             </div>
 
@@ -596,83 +592,53 @@
     <script>
         let restaurantData = {
             name: "Chez Claudette",
-            logoUrl: "",
+            logoUrl: "1000143465_3.jpg",
             interiorUrl: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&auto=format&fit=crop&q=80",
             sliderImages: [
-                { img: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=600&auto=format&fit=crop&q=80", titleEn: "Legendary Poutines", titleAr: "بوتين الأسطورية", tagEn: "Signature", tagAr: "مميز" },
-                { img: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&auto=format&fit=crop&q=80", titleEn: "Casse-Croûte Trios", titleAr: "وجبات كاس-كروت الثلاثية", tagEn: "Combo", tagAr: "وجبة متكاملة" },
-                { img: "https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?w=600&auto=format&fit=crop&q=80", titleEn: "Omelettes & Breakfasts", titleAr: "عجة وفطورات ساخنة", tagEn: "Morning", tagAr: "صباحي" },
-                { img: "https://images.unsplash.com/photo-1550547660-d9450f859349?w=600&auto=format&fit=crop&q=80", titleEn: "Sandwiches & Salads", titleAr: "سندويشات وسلطات", tagEn: "Fresh", tagAr: "طازج" }
+                { img: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=600&auto=format&fit=crop&q=80", title: "Legendary Poutines", tag: "Signature" },
+                { img: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&auto=format&fit=crop&q=80", title: "Casse-Croûte Trios", tag: "Combo" },
+                { img: "https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?w=600&auto=format&fit=crop&q=80", title: "Omelettes & Breakfasts", tag: "Morning" },
+                { img: "https://images.unsplash.com/photo-1550547660-d9450f859349?w=600&auto=format&fit=crop&q=80", title: "Sandwiches & Salads", tag: "Fresh" }
             ],
             menuCategories: [
                 {
                     id: "poutines",
-                    nameEn: "Poutines",
-                    nameAr: "البوتين (Poutines)",
+                    name: "Poutines",
                     icon: "fa-bowl-food",
                     items: [
-                        { nameEn: "Traditional Poutine", nameAr: "بوتين تقليدية أصيلة", descEn: "Crispy fries, fresh cheese curds, and rich hot gravy.", descAr: "بطاطس مقرمشة، جبن قريش طازج، وصلصة ساخنة غنية.", price: "$11.50", img: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=500&auto=format&fit=crop&q=80" },
-                        { nameEn: "The 5 Stars Poutine", nameAr: "بوتين الـ 5 نجوم الفاخرة", descEn: "Loaded with extra cheese curds, savory bacon, and house special sauce.", descAr: "محملة بجبن إضافي، لحم مقدد، وصلصة المطعم الخاصة.", price: "$14.75", img: "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?w=500&auto=format&fit=crop&q=80" }
+                        { name: "Traditional Poutine", desc: "Crispy fries, fresh cheese curds, and rich hot gravy.", price: "$11.50", img: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=500&auto=format&fit=crop&q=80" },
+                        { name: "The 5 Stars Poutine", desc: "Loaded with extra cheese curds, savory bacon, and house special sauce.", price: "$14.75", img: "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?w=500&auto=format&fit=crop&q=80" }
                     ]
                 },
                 {
                     id: "sandwiches",
-                    nameEn: "Sandwiches",
-                    nameAr: "السندويشات",
+                    name: "Sandwiches",
                     icon: "fa-hotdog",
                     items: [
-                        { nameEn: "BLT Sandwich", nameAr: "ساندويتش بي إل تي (B.L.T)", descEn: "Crispy bacon, fresh lettuce, and juicy tomatoes on toasted bread.", descAr: "بكن مقرمش، خس طازج، وطماطم غنية على خبز محمص.", price: "$8.50", img: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=500&auto=format&fit=crop&q=80" }
+                        { name: "BLT Sandwich", desc: "Crispy bacon, fresh lettuce, and juicy tomatoes on toasted bread.", price: "$8.50", img: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=500&auto=format&fit=crop&q=80" }
                     ]
                 }
             ]
         };
 
-        let currentLang = 'en';
         let activeCategory = 'poutines';
         let adminActiveCat = 'poutines';
         let customerCart = [];
 
-        function toggleLanguage() {
-            currentLang = currentLang === 'en' ? 'ar' : 'en';
-            const htmlTag = document.documentElement;
-            if (currentLang === 'ar') {
-                htmlTag.setAttribute('dir', 'rtl');
-                htmlTag.setAttribute('lang', 'ar');
-                document.getElementById('langLabel').innerText = 'English';
-            } else {
-                htmlTag.setAttribute('dir', 'ltr');
-                htmlTag.setAttribute('lang', 'en');
-                document.getElementById('langLabel').innerText = 'العربية';
-            }
-            updateTextContent();
-            renderAll();
-            renderCart();
-        }
-
-        function updateTextContent() {
-            document.querySelectorAll('[data-en]').forEach(el => {
-                const text = el.getAttribute(`data-${currentLang}`);
-                if (text) {
-                    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-                        el.placeholder = text;
-                    } else {
-                        el.innerHTML = text;
-                    }
-                }
-            });
-        }
-
         function renderAll() {
             document.getElementById('brandTitle').innerText = restaurantData.name;
             document.getElementById('heroRestaurantName').innerText = restaurantData.name;
-            document.getElementById('footerBrandName').innerText = restaurantData.name;
             
-            const logoContainer = document.getElementById('brandLogoContainer');
-            if (restaurantData.logoUrl) {
-                logoContainer.innerHTML = `<img src="${restaurantData.logoUrl}" alt="Logo" class="w-full h-full object-cover">`;
-            } else {
-                logoContainer.innerHTML = `<i class="fa-solid fa-utensils"></i>`;
-            }
+            const logoContainers = [document.getElementById('brandLogoContainer'), document.getElementById('footerBrandLogoContainer')];
+            logoContainers.forEach(container => {
+                if (container) {
+                    if (restaurantData.logoUrl) {
+                        container.innerHTML = `<img src="${restaurantData.logoUrl}" alt="Logo" class="h-14 w-auto object-contain drop-shadow-md">`;
+                    } else {
+                        container.innerHTML = `<i class="fa-solid fa-utensils text-gold text-2xl"></i>`;
+                    }
+                }
+            });
 
             // Render Restaurant Interior Image
             const interiorImg = document.getElementById('aboutInteriorImg');
@@ -690,8 +656,8 @@
                         <img src="${slide.img}" alt="Slider Img" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
                         <div class="absolute inset-0 bg-gradient-to-t from-navy-dark via-transparent to-transparent flex items-end p-6">
                             <div>
-                                <span class="text-xs uppercase bg-gold text-navy-dark font-bold px-2.5 py-1 rounded-md">${currentLang === 'ar' ? slide.tagAr : slide.tagEn}</span>
-                                <h4 class="text-xl font-bold text-white mt-1">${currentLang === 'ar' ? slide.titleAr : slide.titleEn}</h4>
+                                <span class="text-xs uppercase bg-gold text-navy-dark font-bold px-2.5 py-1 rounded-md">${slide.tag}</span>
+                                <h4 class="text-xl font-bold text-white mt-1">${slide.title}</h4>
                             </div>
                         </div>
                     </div>
@@ -705,10 +671,10 @@
             restaurantData.menuCategories.forEach(cat => {
                 const isActive = cat.id === activeCategory;
                 const btn = document.createElement('button');
-                btn.className = `px-6 py-3 rounded-xl font-bold text-base transition flex items-center space-x-2 rtl:space-x-reverse ${
+                btn.className = `px-6 py-3 rounded-xl font-bold text-base transition flex items-center space-x-2 ${
                     isActive ? 'bg-gold text-navy-dark shadow-lg scale-105' : 'bg-navy-dark text-gray-300 hover:bg-gold/20 border border-gold/20'
                 }`;
-                btn.innerHTML = `<i class="fa-solid ${cat.icon}"></i><span>${currentLang === 'ar' ? cat.nameAr : cat.nameEn}</span>`;
+                btn.innerHTML = `<i class="fa-solid ${cat.icon}"></i><span>${cat.name}</span>`;
                 btn.onclick = () => {
                     activeCategory = cat.id;
                     renderAll();
@@ -731,14 +697,14 @@
                                 <span class="absolute top-3 right-3 bg-navy-dark/90 text-gold font-extrabold text-base px-3 py-1 rounded-xl border border-gold/30 shadow-lg">${item.price}</span>
                             </div>
                             <div class="p-6">
-                                <h4 class="text-xl font-bold text-white font-display mb-2">${currentLang === 'ar' ? item.nameAr : item.nameEn}</h4>
-                                <p class="text-gray-300 text-sm sm:text-base">${currentLang === 'ar' ? item.descAr : item.descEn}</p>
+                                <h4 class="text-xl font-bold text-white font-display mb-2">${item.name}</h4>
+                                <p class="text-gray-300 text-sm sm:text-base">${item.desc}</p>
                             </div>
                         </div>
                         <div class="p-6 pt-0">
-                            <button onclick='addToCart(${JSON.stringify(item)})' class="w-full bg-gold/20 hover:bg-gold hover:text-navy-dark text-gold font-bold py-3 rounded-xl transition flex items-center justify-center space-x-2 rtl:space-x-reverse shadow-md">
+                            <button onclick='addToCart(${JSON.stringify(item)})' class="w-full bg-gold/20 hover:bg-gold hover:text-navy-dark text-gold font-bold py-3 rounded-xl transition flex items-center justify-center space-x-2 shadow-md">
                                 <i class="fa-solid fa-cart-plus"></i>
-                                <span>${currentLang === 'ar' ? 'إضافة إلى السلة' : 'Add to Cart'}</span>
+                                <span>Add to Cart</span>
                             </button>
                         </div>
                     `;
@@ -754,15 +720,14 @@
         }
 
         function addToCart(item) {
-            const existing = customerCart.find(i => i.nameEn === item.nameEn);
+            const existing = customerCart.find(i => i.name === item.name);
             if (existing) {
                 existing.qty += 1;
             } else {
                 customerCart.push({ ...item, qty: 1 });
             }
             renderCart();
-            const itemName = currentLang === 'ar' ? item.nameAr : item.nameEn;
-            showNotification(currentLang === 'ar' ? `تمت إضافة "${itemName}" إلى السلة` : `Added "${itemName}" to cart`);
+            showNotification(`Added "${item.name}" to cart`);
         }
 
         function updateCartQty(index, change) {
@@ -786,7 +751,7 @@
                 container.innerHTML = `
                     <div class="text-center py-16 text-gray-400 space-y-3">
                         <i class="fa-solid fa-cart-shopping text-4xl text-gold/40"></i>
-                        <p class="text-lg font-medium" data-en="Your cart is currently empty." data-en="Your cart is currently empty." data-ar="سلة المشتريات فارغة حالياً.">Your cart is currently empty.</p>
+                        <p class="text-lg font-medium">Your cart is currently empty.</p>
                     </div>
                 `;
             } else {
@@ -799,10 +764,10 @@
                         <div class="bg-navy p-4 rounded-2xl border border-gold/20 flex items-center gap-4 shadow-md">
                             <img src="${cartItem.img}" class="w-16 h-16 rounded-xl object-cover border border-gold/30">
                             <div class="flex-1">
-                                <h4 class="font-bold text-white text-base">${currentLang === 'ar' ? cartItem.nameAr : cartItem.nameEn}</h4>
+                                <h4 class="font-bold text-white text-base">${cartItem.name}</h4>
                                 <span class="text-gold font-extrabold text-sm">${cartItem.price}</span>
                             </div>
-                            <div class="flex items-center space-x-2 rtl:space-x-reverse bg-navy-dark px-3 py-1.5 rounded-xl border border-gold/30">
+                            <div class="flex items-center space-x-2 bg-navy-dark px-3 py-1.5 rounded-xl border border-gold/30">
                                 <button onclick="updateCartQty(${idx}, -1)" class="text-gold hover:text-white font-bold px-1"><i class="fa-solid fa-minus text-xs"></i></button>
                                 <span class="text-white font-bold text-sm px-1">${cartItem.qty}</span>
                                 <button onclick="updateCartQty(${idx}, 1)" class="text-gold hover:text-white font-bold px-1"><i class="fa-solid fa-plus text-xs"></i></button>
@@ -814,16 +779,14 @@
 
             badge.innerText = totalQty;
             totalPriceEl.innerText = `$${totalPrice.toFixed(2)}`;
-            updateTextContent();
         }
 
         function checkoutCart() {
             if (customerCart.length === 0) {
-                alert(currentLang === 'ar' ? 'سلة المشتريات فارغة!' : 'Your cart is empty!');
+                alert('Your cart is empty!');
                 return;
             }
-            const msg = currentLang === 'ar' ? 'تم إرسال طلبك بنجاح! سنتواصل معك قريباً.' : 'Order placed successfully! We will contact you soon.';
-            showNotification(msg);
+            showNotification('Order placed successfully! We will contact you soon.');
             customerCart = [];
             renderCart();
             toggleCartDrawer();
@@ -883,7 +846,7 @@
                         <img src="${slide.img}" class="w-20 h-16 rounded-xl object-cover border border-gold/30">
                         <div class="flex-1 w-full space-y-2">
                             <input type="text" id="sliderImg_${idx}" class="w-full bg-navy-dark border border-gold/30 rounded-xl px-3 py-2 text-sm text-white" value="${slide.img}" placeholder="Image URL">
-                            <input type="text" id="sliderTitle_${idx}" class="w-full bg-navy-dark border border-gold/30 rounded-xl px-3 py-2 text-sm text-white" value="${slide.titleEn}" placeholder="Title">
+                            <input type="text" id="sliderTitle_${idx}" class="w-full bg-navy-dark border border-gold/30 rounded-xl px-3 py-2 text-sm text-white" value="${slide.title}" placeholder="Title">
                         </div>
                     </div>
                 `;
@@ -896,8 +859,8 @@
             restaurantData.menuCategories.forEach(cat => {
                 const isActive = cat.id === adminActiveCat;
                 const btn = document.createElement('button');
-                btn.className = `px-4 py-2 rounded-xl text-xs font-bold transition flex items-center space-x-1 rtl:space-x-reverse ${isActive ? 'bg-gold text-navy-dark' : 'bg-navy-dark text-gray-300 border border-gold/20'}`;
-                btn.innerHTML = `<span>${cat.nameEn}</span> <i onclick="deleteCategory('${cat.id}', event)" class="fa-solid fa-trash-can text-red-400 hover:text-red-600 ml-1"></i>`;
+                btn.className = `px-4 py-2 rounded-xl text-xs font-bold transition flex items-center space-x-1 ${isActive ? 'bg-gold text-navy-dark' : 'bg-navy-dark text-gray-300 border border-gold/20'}`;
+                btn.innerHTML = `<span>${cat.name}</span> <i onclick="deleteCategory('${cat.id}', event)" class="fa-solid fa-trash-can text-red-400 hover:text-red-600 ml-1"></i>`;
                 btn.onclick = (e) => {
                     if(e.target.tagName === 'I') return;
                     adminActiveCat = cat.id;
@@ -920,10 +883,10 @@
                         <img src="${item.img}" class="w-20 h-20 rounded-xl object-cover border border-gold/30">
                         <div class="flex-1 w-full space-y-2">
                             <div class="flex gap-2">
-                                <input type="text" id="admItemName_${idx}" class="flex-1 bg-navy-dark border border-gold/30 rounded-xl px-3 py-2 text-sm text-white font-bold" value="${item.nameEn}" placeholder="Item Name">
+                                <input type="text" id="admItemName_${idx}" class="flex-1 bg-navy-dark border border-gold/30 rounded-xl px-3 py-2 text-sm text-white font-bold" value="${item.name}" placeholder="Item Name">
                                 <input type="text" id="admItemPrice_${idx}" class="w-32 bg-navy-dark border border-gold/30 rounded-xl px-3 py-2 text-sm text-gold font-extrabold text-center" value="${item.price}" placeholder="Price">
                             </div>
-                            <input type="text" id="admItemDesc_${idx}" class="w-full bg-navy-dark border border-gold/30 rounded-xl px-3 py-1.5 text-xs text-gray-300" value="${item.descEn}" placeholder="Description">
+                            <input type="text" id="admItemDesc_${idx}" class="w-full bg-navy-dark border border-gold/30 rounded-xl px-3 py-1.5 text-xs text-gray-300" value="${item.desc}" placeholder="Description">
                             <input type="text" id="admItemImg_${idx}" class="w-full bg-navy-dark border border-gold/30 rounded-xl px-3 py-1.5 text-xs text-gray-400" value="${item.img}" placeholder="Image URL">
                         </div>
                         <button onclick="deleteProduct(${idx})" class="absolute top-2 right-2 text-red-400 hover:text-red-500 bg-black/40 p-2 rounded-lg"><i class="fa-solid fa-trash"></i></button>
@@ -936,10 +899,8 @@
             const cat = restaurantData.menuCategories.find(c => c.id === adminActiveCat);
             if (!cat) return;
             cat.items.push({
-                nameEn: "New Product",
-                nameAr: "منتج جديد",
-                descEn: "Delicious freshly prepared meal.",
-                descAr: "وجبة طازجة لذيذة.",
+                name: "New Product",
+                desc: "Delicious freshly prepared meal.",
                 price: "$10.00",
                 img: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500&auto=format&fit=crop&q=80"
             });
@@ -960,8 +921,7 @@
                 const newId = catName.toLowerCase().replace(/\s+/g, '-');
                 restaurantData.menuCategories.push({
                     id: newId,
-                    nameEn: catName,
-                    nameAr: catName,
+                    name: catName,
                     icon: "fa-utensils",
                     items: []
                 });
@@ -994,10 +954,7 @@
                 const imgVal = document.getElementById(`sliderImg_${idx}`).value;
                 const titleVal = document.getElementById(`sliderTitle_${idx}`).value;
                 if (imgVal) slide.img = imgVal;
-                if (titleVal) {
-                    slide.titleEn = titleVal;
-                    slide.titleAr = titleVal;
-                }
+                if (titleVal) slide.title = titleVal;
             });
 
             const cat = restaurantData.menuCategories.find(c => c.id === adminActiveCat);
@@ -1007,16 +964,16 @@
                     const priceVal = document.getElementById(`admItemPrice_${idx}`).value;
                     const descVal = document.getElementById(`admItemDesc_${idx}`).value;
                     const imgVal = document.getElementById(`admItemImg_${idx}`).value;
-                    if (nameVal) item.nameEn = nameVal;
+                    if (nameVal) item.name = nameVal;
                     if (priceVal) item.price = priceVal;
-                    if (descVal) item.descEn = descVal;
+                    if (descVal) item.desc = descVal;
                     if (imgVal) item.img = imgVal;
                 });
             }
 
             closeAdminModal();
             renderAll();
-            showNotification(currentLang === 'ar' ? 'تم حفظ التغييرات وتحديث الموقع بنجاح!' : 'Changes saved and website updated successfully!');
+            showNotification('Changes saved and website updated successfully!');
         }
 
         function toggleMobileMenu() {
@@ -1025,8 +982,7 @@
 
         function handleFormSubmit(e) {
             e.preventDefault();
-            const msg = currentLang === 'ar' ? 'شكراً لك! تم إرسال رسالتك بنجاح.' : 'Thank you! Your message has been sent.';
-            showNotification(msg);
+            showNotification('Thank you! Your message has been sent.');
             e.target.reset();
         }
 
