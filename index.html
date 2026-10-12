@@ -68,14 +68,10 @@
 
     <header class="sticky top-0 z-50 bg-navy/95 backdrop-blur-md border-b border-gold/20 shadow-xl transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-24 flex items-center justify-between">
-            <!-- Brand Logo / Title -->
+            <!-- Brand Logo Only (Text removed) -->
             <div class="flex items-center space-x-3">
                 <div id="brandLogoContainer" class="flex items-center justify-center overflow-hidden flex-shrink-0">
                     <img src="1000143465_3.jpg" alt="Logo" class="h-14 w-auto object-contain drop-shadow-md">
-                </div>
-                <div>
-                    <span class="block text-xs uppercase tracking-widest text-gold font-semibold">RESTAURANT</span>
-                    <h1 id="brandTitle" class="text-2xl sm:text-3xl font-display font-bold text-gold tracking-wide">Chez Claudette</h1>
                 </div>
             </div>
 
@@ -89,12 +85,11 @@
                 <a href="#contact" class="text-gray-200 hover:text-gold transition">Contact</a>
             </nav>
 
-            <!-- Updated Cart Toggle Button & Mobile Hamburger -->
+            <!-- Cart Toggle Button (Text "Cart" removed) & Mobile Hamburger -->
             <div class="flex items-center space-x-4">
-                <!-- Modern Styled Cart Button -->
-                <button onclick="toggleCartDrawer()" class="relative bg-gradient-to-r from-gold to-gold-dark hover:from-gold-light hover:to-gold text-navy-dark font-bold px-4 py-2.5 rounded-xl shadow-lg transition transform hover:scale-105 flex items-center space-x-2">
-                    <i class="fa-solid fa-cart-shopping text-lg"></i>
-                    <span class="text-sm font-extrabold hidden sm:inline">Cart</span>
+                <!-- Icon-only Cart Button -->
+                <button onclick="toggleCartDrawer()" class="relative bg-gradient-to-r from-gold to-gold-dark hover:from-gold-light hover:to-gold text-navy-dark font-bold p-3 rounded-xl shadow-lg transition transform hover:scale-105 flex items-center justify-center">
+                    <i class="fa-solid fa-cart-shopping text-xl"></i>
                     <span id="cartBadge" class="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-black w-6 h-6 rounded-full flex items-center justify-center shadow-md border-2 border-navy-dark">0</span>
                 </button>
 
@@ -626,7 +621,6 @@
         let customerCart = [];
 
         function renderAll() {
-            document.getElementById('brandTitle').innerText = restaurantData.name;
             document.getElementById('heroRestaurantName').innerText = restaurantData.name;
             
             const logoContainers = [document.getElementById('brandLogoContainer'), document.getElementById('footerBrandLogoContainer')];
