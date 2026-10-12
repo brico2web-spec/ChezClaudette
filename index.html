@@ -86,11 +86,18 @@
                 <a href="#about" class="text-gray-200 hover:text-gold transition lang-nav-about" data-en="About Us" data-ar="من نحن">About Us</a>
                 <a href="#menu" class="text-gray-200 hover:text-gold transition lang-nav-menu" data-en="Our Menu" data-ar="قائمة الطعام">Our Menu</a>
                 <a href="#reviews" class="text-gray-200 hover:text-gold transition lang-nav-reviews" data-en="Google Reviews" data-ar="تقييمات جوجل">Google Reviews</a>
+                <a href="#services" class="text-gray-200 hover:text-gold transition lang-nav-services" data-en="Services & Info" data-ar="الخدمات والمعلومات">Services & Info</a>
                 <a href="#contact" class="text-gray-200 hover:text-gold transition lang-nav-contact" data-en="Contact" data-ar="اتصل بنا">Contact</a>
             </nav>
 
-            <!-- Language Toggle & Mobile Hamburger -->
+            <!-- Cart Toggle Button, Language Toggle & Mobile Hamburger -->
             <div class="flex items-center space-x-4 rtl:space-x-reverse">
+                <!-- Cart Button -->
+                <button onclick="toggleCartDrawer()" class="relative bg-gold/20 hover:bg-gold hover:text-navy-dark text-gold border border-gold p-3 rounded-xl transition flex items-center justify-center shadow-md">
+                    <i class="fa-solid fa-cart-shopping text-lg"></i>
+                    <span id="cartBadge" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center shadow">0</span>
+                </button>
+
                 <button id="langToggleBtn" onclick="toggleLanguage()" class="bg-gold hover:bg-gold-light text-navy-dark font-bold px-4 py-2.5 rounded-xl shadow-md transition transform hover:scale-105 flex items-center space-x-2 rtl:space-x-reverse">
                     <i class="fa-solid fa-globe"></i>
                     <span id="langLabel" class="text-sm font-bold">العربية</span>
@@ -111,6 +118,40 @@
             <a href="#contact" onclick="toggleMobileMenu()" class="block text-gray-200 hover:text-gold py-2 text-lg lang-nav-contact" data-en="Contact" data-ar="اتصل بنا">Contact</a>
         </div>
     </header>
+
+    <!-- SHOPPING CART DRAWER -->
+    <div id="cartDrawer" class="fixed inset-0 z-50 overflow-hidden hidden">
+        <div class="absolute inset-0 bg-black/70 backdrop-blur-sm transition-opacity" onclick="toggleCartDrawer()"></div>
+        <div class="absolute inset-y-0 right-0 max-w-full flex pl-10">
+            <div class="w-screen max-w-md bg-navy-dark border-l-2 border-gold flex flex-col shadow-2xl">
+                <!-- Cart Header -->
+                <div class="bg-navy px-6 py-5 border-b border-gold/20 flex items-center justify-between">
+                    <div class="flex items-center space-x-3 rtl:space-x-reverse text-gold">
+                        <i class="fa-solid fa-cart-shopping text-2xl"></i>
+                        <h3 class="text-2xl font-bold font-display" data-en="Your Shopping Cart" data-ar="سلة مشترياتك">Your Shopping Cart</h3>
+                    </div>
+                    <button onclick="toggleCartDrawer()" class="text-gray-400 hover:text-white text-2xl bg-white/5 hover:bg-white/10 w-10 h-10 rounded-full flex items-center justify-center transition">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                <!-- Cart Items List -->
+                <div class="flex-1 overflow-y-auto p-6 space-y-4" id="cartItemsContainer">
+                    <!-- Items populated dynamically -->
+                </div>
+                <!-- Cart Footer & Checkout -->
+                <div class="bg-navy p-6 border-t border-gold/20 space-y-4">
+                    <div class="flex justify-between items-center text-lg font-bold text-white">
+                        <span data-en="Total Amount:" data-ar="المجموع الإجمالي:">Total Amount:</span>
+                        <span id="cartTotalPrice" class="text-gold text-2xl">$0.00</span>
+                    </div>
+                    <button onclick="checkoutCart()" class="w-full bg-gold hover:bg-gold-light text-navy-dark font-extrabold text-lg py-4 rounded-xl shadow-xl transition transform hover:scale-105 flex items-center justify-center space-x-2 rtl:space-x-reverse">
+                        <i class="fa-solid fa-bag-shopping"></i>
+                        <span data-en="Proceed to Checkout" data-ar="إتمام الطلب الآن">Proceed to Checkout</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <section id="home" class="relative overflow-hidden bg-navy py-16 sm:py-24 border-b border-gold/10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
@@ -153,7 +194,7 @@
                 </div>
                 <div class="relative">
                     <div class="rounded-3xl overflow-hidden shadow-2xl border-4 border-gold/30">
-                        <img src="https://placehold.co/600x500/102340/F5BE3B?text=Restaurant+Interior" alt="Restaurant Chez Claudette" class="w-full h-auto object-cover">
+                        <img id="aboutInteriorImg" src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&auto=format&fit=crop&q=80" alt="Restaurant Chez Claudette" class="w-full h-auto object-cover">
                     </div>
                     <div class="absolute -bottom-6 -left-6 bg-gold text-navy-dark p-6 rounded-2xl shadow-2xl hidden sm:block border-2 border-white/20">
                         <p class="font-display font-bold text-2xl">Chez Claudette</p>
@@ -269,30 +310,44 @@
                 <h3 class="text-3xl sm:text-5xl font-display font-bold text-white mt-2 mb-4" data-en="Services & Amenities" data-ar="خدماتنا ووسائل الراحة">Services & Amenities</h3>
                 <p class="text-gray-300 text-lg" data-en="Everything you need to know about our dining experience, payment options, and atmosphere." data-ar="كل ما تحتاج معرفته عن تجربة تناول الطعام لدينا، خيارات الدفع، والأجواء المميزة.">Everything you need to know about our dining experience, payment options, and atmosphere.</p>
             </div>
+            
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- 1. Dining Services -->
+                <div class="bg-navy-dark p-6 rounded-2xl border border-gold/20 shadow-xl">
+                    <div class="flex items-center space-x-3 rtl:space-x-reverse text-gold text-xl font-bold mb-4">
+                        <i class="fa-solid fa-utensils"></i>
+                        <h4 class="text-white" data-en="Dining Services" data-ar="خدمات المطعم">Dining Services</h4>
+                    </div>
+                    <ul class="space-y-2 text-gray-300 text-sm sm:text-base">
+                        <li class="flex items-center space-x-2 rtl:space-x-reverse"><i class="fa-solid fa-check text-gold"></i><span data-en="Breakfast" data-ar="إفطار">Breakfast</span></li>
+                        <li class="flex items-center space-x-2 rtl:space-x-reverse"><i class="fa-solid fa-check text-gold"></i><span data-en="Brunch" data-ar="برنش">Brunch</span></li>
+                        <li class="flex items-center space-x-2 rtl:space-x-reverse"><i class="fa-solid fa-check text-gold"></i><span data-en="Lunch" data-ar="غداء (ديجيهنر)">Lunch</span></li>
+                        <li class="flex items-center space-x-2 rtl:space-x-reverse"><i class="fa-solid fa-check text-gold"></i><span data-en="Dinner" data-ar="عشاء (دينير)">Dinner</span></li>
+                        <li class="flex items-center space-x-2 rtl:space-x-reverse"><i class="fa-solid fa-check text-gold"></i><span data-en="Catering" data-ar="خدمة تقديم الطعام (ترابور)">Catering</span></li>
+                        <li class="flex items-center space-x-2 rtl:space-x-reverse"><i class="fa-solid fa-check text-gold"></i><span data-en="Counter Service" data-ar="خدمة المنضدة">Counter Service</span></li>
+                        <li class="flex items-center space-x-2 rtl:space-x-reverse"><i class="fa-solid fa-check text-gold"></i><span data-en="Desserts" data-ar="حلويات">Desserts</span></li>
+                        <li class="flex items-center space-x-2 rtl:space-x-reverse"><i class="fa-solid fa-check text-gold"></i><span data-en="Seating" data-ar="أماكن جلوس">Seating</span></li>
+                        <li class="flex items-center space-x-2 rtl:space-x-reverse"><i class="fa-solid fa-check text-gold"></i><span data-en="Table Service" data-ar="خدمة الطاولة">Table Service</span></li>
+                    </ul>
+                </div>
+
+                <!-- 2. Service Options & Amenities -->
                 <div class="bg-navy-dark p-6 rounded-2xl border border-gold/20 shadow-xl">
                     <div class="flex items-center space-x-3 rtl:space-x-reverse text-gold text-xl font-bold mb-4">
                         <i class="fa-solid fa-bell-concierge"></i>
-                        <h4 class="text-white" data-en="Service Options" data-ar="خيارات الخدمة">Service Options</h4>
+                        <h4 class="text-white" data-en="Service Options & Amenities" data-ar="خيارات الخدمة والمرافق">Service Options & Amenities</h4>
                     </div>
                     <ul class="space-y-2 text-gray-300 text-sm sm:text-base">
                         <li class="flex items-center space-x-2 rtl:space-x-reverse"><i class="fa-solid fa-check text-gold"></i><span data-en="Outdoor Terrace" data-ar="جلسات خارجية (تراس)">Outdoor Terrace</span></li>
                         <li class="flex items-center space-x-2 rtl:space-x-reverse"><i class="fa-solid fa-check text-gold"></i><span data-en="Home Delivery" data-ar="توصيل للمنازل">Home Delivery</span></li>
-                        <li class="flex items-center space-x-2 rtl:space-x-reverse"><i class="fa-solid fa-check text-gold"></i><span data-en="Dine-in Service" data-ar="تناول الطعام بالمطعم">Dine-in Service</span></li>
-                        <li class="flex items-center space-x-2 rtl:space-x-reverse"><i class="fa-solid fa-check text-gold"></i><span data-en="Takeout Available" data-ar="طلب سفري">Takeout Available</span></li>
+                        <li class="flex items-center space-x-2 rtl:space-x-reverse"><i class="fa-solid fa-check text-gold"></i><span data-en="Dine-in Service" data-ar="خدمات على الطاولة / بالمطعم">Dine-in Service</span></li>
+                        <li class="flex items-center space-x-2 rtl:space-x-reverse"><i class="fa-solid fa-check text-gold"></i><span data-en="Takeout Available" data-ar="بيع للسفري (Vente à emporter)">Takeout Available</span></li>
+                        <li class="flex items-center space-x-2 rtl:space-x-reverse"><i class="fa-solid fa-check text-gold"></i><span data-en="Restrooms" data-ar="دورات المياه (طواليت)">Restrooms</span></li>
+                        <li class="flex items-center space-x-2 rtl:space-x-reverse"><i class="fa-solid fa-check text-gold"></i><span data-en="Free Street Parking" data-ar="موقف سيارات مجاني في الشارع">Free Street Parking</span></li>
                     </ul>
                 </div>
-                <div class="bg-navy-dark p-6 rounded-2xl border border-gold/20 shadow-xl">
-                    <div class="flex items-center space-x-3 rtl:space-x-reverse text-gold text-xl font-bold mb-4">
-                        <i class="fa-solid fa-utensils"></i>
-                        <h4 class="text-white" data-en="Offerings & Meals" data-ar="العروض والوجبات">Offerings & Meals</h4>
-                    </div>
-                    <ul class="space-y-2 text-gray-300 text-sm sm:text-base">
-                        <li class="flex items-center space-x-2 rtl:space-x-reverse"><i class="fa-solid fa-check text-gold"></i><span data-en="Breakfast, Brunch, Lunch & Dinner" data-ar="إفطار، برنش، غداء وعشاء">Breakfast, Brunch, Lunch & Dinner</span></li>
-                        <li class="flex items-center space-x-2 rtl:space-x-reverse"><i class="fa-solid fa-check text-gold"></i><span data-en="Late-Night Food Options" data-ar="وجبات متأخرة بالليل">Late-Night Food Options</span></li>
-                        <li class="flex items-center space-x-2 rtl:space-x-reverse"><i class="fa-solid fa-check text-gold"></i><span data-en="Vegetarian Options Available" data-ar="خيارات مناسبة للنباتيين">Vegetarian Options Available</span></li>
-                    </ul>
-                </div>
+
+                <!-- 3. Atmosphere & Crowd -->
                 <div class="bg-navy-dark p-6 rounded-2xl border border-gold/20 shadow-xl">
                     <div class="flex items-center space-x-3 rtl:space-x-reverse text-gold text-xl font-bold mb-4">
                         <i class="fa-solid fa-users"></i>
@@ -300,8 +355,49 @@
                     </div>
                     <ul class="space-y-2 text-gray-300 text-sm sm:text-base">
                         <li class="flex items-center space-x-2 rtl:space-x-reverse"><i class="fa-solid fa-check text-gold"></i><span data-en="Casual & Relaxed Atmosphere" data-ar="أجواء مريحة وغير رسمية">Casual & Relaxed Atmosphere</span></li>
-                        <li class="flex items-center space-x-2 rtl:space-x-reverse"><i class="fa-solid fa-check text-gold"></i><span data-en="Cozy & Pleasant Setting" data-ar="مكان لطيف ومريح">Cozy & Pleasant Setting</span></li>
-                        <li class="flex items-center space-x-2 rtl:space-x-reverse"><i class="fa-solid fa-check text-gold"></i><span data-en="Great for Groups & Students" data-ar="مناسب للمجموعات والطلاب">Great for Groups & Students</span></li>
+                        <li class="flex items-center space-x-2 rtl:space-x-reverse"><i class="fa-solid fa-check text-gold"></i><span data-en="Pleasant Setting" data-ar="إطار ودي ولطيف">Pleasant Setting</span></li>
+                        <li class="flex items-center space-x-2 rtl:space-x-reverse"><i class="fa-solid fa-check text-gold"></i><span data-en="Students" data-ar="الطلاب">Students</span></li>
+                        <li class="flex items-center space-x-2 rtl:space-x-reverse"><i class="fa-solid fa-check text-gold"></i><span data-en="Groups" data-ar="المجموعات">Groups</span></li>
+                        <li class="flex items-center space-x-2 rtl:space-x-reverse"><i class="fa-solid fa-check text-gold"></i><span data-en="Tourists" data-ar="السياح">Tourists</span></li>
+                    </ul>
+                </div>
+
+                <!-- 4. Planning & Reservations -->
+                <div class="bg-navy-dark p-6 rounded-2xl border border-gold/20 shadow-xl">
+                    <div class="flex items-center space-x-3 rtl:space-x-reverse text-gold text-xl font-bold mb-4">
+                        <i class="fa-solid fa-calendar-check"></i>
+                        <h4 class="text-white" data-en="Planning & Reservations" data-ar="التخطيط والحجوزات">Planning & Reservations</h4>
+                    </div>
+                    <ul class="space-y-2 text-gray-300 text-sm sm:text-base">
+                        <li class="flex items-center space-x-2 rtl:space-x-reverse"><i class="fa-solid fa-check text-gold"></i><span data-en="Reservations Accepted" data-ar="الحجوزات مقبولة">Reservations Accepted</span></li>
+                    </ul>
+                </div>
+
+                <!-- 5. Offer & Drinks -->
+                <div class="bg-navy-dark p-6 rounded-2xl border border-gold/20 shadow-xl">
+                    <div class="flex items-center space-x-3 rtl:space-x-reverse text-gold text-xl font-bold mb-4">
+                        <i class="fa-solid fa-martini-glass-citrus"></i>
+                        <h4 class="text-white" data-en="Offer & Drinks" data-ar="العروض والمشروبات">Offer & Drinks</h4>
+                    </div>
+                    <ul class="space-y-2 text-gray-300 text-sm sm:text-base">
+                        <li class="flex items-center space-x-2 rtl:space-x-reverse"><i class="fa-solid fa-check text-gold"></i><span data-en="Alcohol & Beer" data-ar="مشروبات كحولية وبيرة">Alcohol & Beer</span></li>
+                        <li class="flex items-center space-x-2 rtl:space-x-reverse"><i class="fa-solid fa-check text-gold"></i><span data-en="Coffees" data-ar="قهوة">Coffees</span></li>
+                        <li class="flex items-center space-x-2 rtl:space-x-reverse"><i class="fa-solid fa-check text-gold"></i><span data-en="Vegetarian Options" data-ar="خيارات مناسبة للنباتيين">Vegetarian Options</span></li>
+                        <li class="flex items-center space-x-2 rtl:space-x-reverse"><i class="fa-solid fa-check text-gold"></i><span data-en="Small Plates to Share" data-ar="أطباق صغيرة للمشاركة">Small Plates to Share</span></li>
+                        <li class="flex items-center space-x-2 rtl:space-x-reverse"><i class="fa-solid fa-check text-gold"></i><span data-en="Late-Night Food" data-ar="وجبات متأخرة في الليل">Late-Night Food</span></li>
+                    </ul>
+                </div>
+
+                <!-- 6. Payments & Accessibility -->
+                <div class="bg-navy-dark p-6 rounded-2xl border border-gold/20 shadow-xl">
+                    <div class="flex items-center space-x-3 rtl:space-x-reverse text-gold text-xl font-bold mb-4">
+                        <i class="fa-solid fa-credit-card"></i>
+                        <h4 class="text-white" data-en="Payments & Accessibility" data-ar="طرق الدفع وإمكانية الوصول">Payments & Accessibility</h4>
+                    </div>
+                    <ul class="space-y-2 text-gray-300 text-sm sm:text-base">
+                        <li class="flex items-center space-x-2 rtl:space-x-reverse"><i class="fa-solid fa-check text-gold"></i><span data-en="Credit Cards & Debit Cards" data-ar="بطاقات الائتمان والخصم">Credit Cards & Debit Cards</span></li>
+                        <li class="flex items-center space-x-2 rtl:space-x-reverse"><i class="fa-solid fa-check text-gold"></i><span data-en="NFC Mobile Payments" data-ar="الدفع عبر الهاتف المحمول NFC">NFC Mobile Payments</span></li>
+                        <li class="flex items-center space-x-2 rtl:space-x-reverse text-gray-400"><i class="fa-solid fa-xmark text-red-400"></i><span data-en="Wheelchair-accessible entrance" data-ar="مدخل غير مجهز للكراسي المتحركة">Wheelchair-accessible entrance</span></li>
                     </ul>
                 </div>
             </div>
@@ -441,9 +537,9 @@
 
             <div class="p-6 sm:p-8 space-y-6 overflow-y-auto flex-1">
                 
-                <!-- Tab 1: Branding -->
+                <!-- Tab 1: Branding & Interior Image -->
                 <div id="admTabContent_brand" class="space-y-4">
-                    <h4 class="text-lg font-bold text-gold border-b border-gold/20 pb-2" data-en="General Restaurant Branding" data-ar="الهوية العامة للمطعم">General Restaurant Branding</h4>
+                    <h4 class="text-lg font-bold text-gold border-b border-gold/20 pb-2" data-en="General Restaurant Branding & Interior" data-ar="الهوية العامة وصورة ديكور المطعم">General Restaurant Branding & Interior</h4>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
                             <label class="block text-sm font-medium text-gray-300 mb-1.5" data-en="Restaurant Name" data-ar="اسم المطعم">Restaurant Name</label>
@@ -452,6 +548,10 @@
                         <div>
                             <label class="block text-sm font-medium text-gray-300 mb-1.5" data-en="Logo Image URL" data-ar="رابط صورة الشعار (Logo URL)">Logo Image URL</label>
                             <input type="text" id="adminLogoUrl" class="w-full bg-navy border border-gold/30 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold" placeholder="https://...">
+                        </div>
+                        <div class="sm:col-span-2">
+                            <label class="block text-sm font-medium text-gray-300 mb-1.5" data-en="Restaurant Interior Image URL" data-ar="رابط صورة ديكور المطعم (Restaurant Interior)">Restaurant Interior Image URL</label>
+                            <input type="text" id="adminInteriorUrl" class="w-full bg-navy border border-gold/30 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold" placeholder="https://images.unsplash.com/...">
                         </div>
                     </div>
                 </div>
@@ -497,6 +597,7 @@
         let restaurantData = {
             name: "Chez Claudette",
             logoUrl: "",
+            interiorUrl: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&auto=format&fit=crop&q=80",
             sliderImages: [
                 { img: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=600&auto=format&fit=crop&q=80", titleEn: "Legendary Poutines", titleAr: "بوتين الأسطورية", tagEn: "Signature", tagAr: "مميز" },
                 { img: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&auto=format&fit=crop&q=80", titleEn: "Casse-Croûte Trios", titleAr: "وجبات كاس-كروت الثلاثية", tagEn: "Combo", tagAr: "وجبة متكاملة" },
@@ -529,6 +630,7 @@
         let currentLang = 'en';
         let activeCategory = 'poutines';
         let adminActiveCat = 'poutines';
+        let customerCart = [];
 
         function toggleLanguage() {
             currentLang = currentLang === 'en' ? 'ar' : 'en';
@@ -544,6 +646,7 @@
             }
             updateTextContent();
             renderAll();
+            renderCart();
         }
 
         function updateTextContent() {
@@ -569,6 +672,12 @@
                 logoContainer.innerHTML = `<img src="${restaurantData.logoUrl}" alt="Logo" class="w-full h-full object-cover">`;
             } else {
                 logoContainer.innerHTML = `<i class="fa-solid fa-utensils"></i>`;
+            }
+
+            // Render Restaurant Interior Image
+            const interiorImg = document.getElementById('aboutInteriorImg');
+            if (restaurantData.interiorUrl) {
+                interiorImg.src = restaurantData.interiorUrl;
             }
 
             // Render Slider
@@ -627,15 +736,97 @@
                             </div>
                         </div>
                         <div class="p-6 pt-0">
-                            <button onclick="orderItem('${item.nameEn}')" class="w-full bg-gold/20 hover:bg-gold hover:text-navy-dark text-gold font-bold py-3 rounded-xl transition flex items-center justify-center space-x-2 rtl:space-x-reverse shadow-md">
+                            <button onclick='addToCart(${JSON.stringify(item)})' class="w-full bg-gold/20 hover:bg-gold hover:text-navy-dark text-gold font-bold py-3 rounded-xl transition flex items-center justify-center space-x-2 rtl:space-x-reverse shadow-md">
                                 <i class="fa-solid fa-cart-plus"></i>
-                                <span>${currentLang === 'ar' ? 'اطلب الآن' : 'Order Item'}</span>
+                                <span>${currentLang === 'ar' ? 'إضافة إلى السلة' : 'Add to Cart'}</span>
                             </button>
                         </div>
                     `;
                     menuContainer.appendChild(card);
                 });
             }
+        }
+
+        // Shopping Cart Management Functions
+        function toggleCartDrawer() {
+            const drawer = document.getElementById('cartDrawer');
+            drawer.classList.toggle('hidden');
+        }
+
+        function addToCart(item) {
+            const existing = customerCart.find(i => i.nameEn === item.nameEn);
+            if (existing) {
+                existing.qty += 1;
+            } else {
+                customerCart.push({ ...item, qty: 1 });
+            }
+            renderCart();
+            const itemName = currentLang === 'ar' ? item.nameAr : item.nameEn;
+            showNotification(currentLang === 'ar' ? `تمت إضافة "${itemName}" إلى السلة` : `Added "${itemName}" to cart`);
+        }
+
+        function updateCartQty(index, change) {
+            customerCart[index].qty += change;
+            if (customerCart[index].qty <= 0) {
+                customerCart.splice(index, 1);
+            }
+            renderCart();
+        }
+
+        function renderCart() {
+            const container = document.getElementById('cartItemsContainer');
+            const badge = document.getElementById('cartBadge');
+            const totalPriceEl = document.getElementById('cartTotalPrice');
+            
+            container.innerHTML = '';
+            let totalQty = 0;
+            let totalPrice = 0;
+
+            if (customerCart.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-16 text-gray-400 space-y-3">
+                        <i class="fa-solid fa-cart-shopping text-4xl text-gold/40"></i>
+                        <p class="text-lg font-medium" data-en="Your cart is currently empty." data-en="Your cart is currently empty." data-ar="سلة المشتريات فارغة حالياً.">Your cart is currently empty.</p>
+                    </div>
+                `;
+            } else {
+                customerCart.forEach((cartItem, idx) => {
+                    totalQty += cartItem.qty;
+                    const itemPriceNum = parseFloat(cartItem.price.replace('$', '')) || 0;
+                    totalPrice += itemPriceNum * cartItem.qty;
+
+                    container.innerHTML += `
+                        <div class="bg-navy p-4 rounded-2xl border border-gold/20 flex items-center gap-4 shadow-md">
+                            <img src="${cartItem.img}" class="w-16 h-16 rounded-xl object-cover border border-gold/30">
+                            <div class="flex-1">
+                                <h4 class="font-bold text-white text-base">${currentLang === 'ar' ? cartItem.nameAr : cartItem.nameEn}</h4>
+                                <span class="text-gold font-extrabold text-sm">${cartItem.price}</span>
+                            </div>
+                            <div class="flex items-center space-x-2 rtl:space-x-reverse bg-navy-dark px-3 py-1.5 rounded-xl border border-gold/30">
+                                <button onclick="updateCartQty(${idx}, -1)" class="text-gold hover:text-white font-bold px-1"><i class="fa-solid fa-minus text-xs"></i></button>
+                                <span class="text-white font-bold text-sm px-1">${cartItem.qty}</span>
+                                <button onclick="updateCartQty(${idx}, 1)" class="text-gold hover:text-white font-bold px-1"><i class="fa-solid fa-plus text-xs"></i></button>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+
+            badge.innerText = totalQty;
+            totalPriceEl.innerText = `$${totalPrice.toFixed(2)}`;
+            updateTextContent();
+        }
+
+        function checkoutCart() {
+            if (customerCart.length === 0) {
+                alert(currentLang === 'ar' ? 'سلة المشتريات فارغة!' : 'Your cart is empty!');
+                return;
+            }
+            const msg = currentLang === 'ar' ? 'تم إرسال طلبك بنجاح! سنتواصل معك قريباً.' : 'Order placed successfully! We will contact you soon.';
+            showNotification(msg);
+            customerCart = [];
+            renderCart();
+            toggleCartDrawer();
         }
 
         // Authentication Flow
@@ -660,6 +851,7 @@
                 document.getElementById('adminModal').classList.remove('hidden');
                 document.getElementById('adminRestName').value = restaurantData.name;
                 document.getElementById('adminLogoUrl').value = restaurantData.logoUrl;
+                document.getElementById('adminInteriorUrl').value = restaurantData.interiorUrl;
                 renderAdminSliderInputs();
                 renderAdminCategoryTabs();
                 renderAdminMenuItems();
@@ -796,6 +988,7 @@
         function saveAdminChanges() {
             restaurantData.name = document.getElementById('adminRestName').value;
             restaurantData.logoUrl = document.getElementById('adminLogoUrl').value;
+            restaurantData.interiorUrl = document.getElementById('adminInteriorUrl').value;
 
             restaurantData.sliderImages.forEach((slide, idx) => {
                 const imgVal = document.getElementById(`sliderImg_${idx}`).value;
@@ -830,11 +1023,6 @@
             document.getElementById('mobileMenu').classList.toggle('hidden');
         }
 
-        function orderItem(itemName) {
-            const msg = currentLang === 'ar' ? `تم إضافة "${itemName}" إلى طلبك بنجاح!` : `"${itemName}" has been added to your order!`;
-            showNotification(msg);
-        }
-
         function handleFormSubmit(e) {
             e.preventDefault();
             const msg = currentLang === 'ar' ? 'شكراً لك! تم إرسال رسالتك بنجاح.' : 'Thank you! Your message has been sent.';
@@ -852,6 +1040,7 @@
 
         window.onload = function() {
             renderAll();
+            renderCart();
         };
     </script>
 </body>
