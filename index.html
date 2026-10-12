@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Chez Claudette</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Cairo:wght@400;600;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: {
+                            DEFAULT: '#102340',
+                            dark: '#0a172c',
+                            light: '#1a365d'
+                        },
+                        gold: {
+                            DEFAULT: '#F5BE3B',
+                            light: '#fbd46d',
+                            dark: '#d99d1e'
+                        }
+                    },
+                    fontFamily: {
+                        display: ['"Playfair Display"', 'Cairo', 'serif'],
+                        sans: ['Inter', 'Cairo', 'sans-serif'],
+                        arabic: ['Cairo', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #102340;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #F5BE3B;
+            border-radius: 5px;
+        }
+        @keyframes autoScroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-slider {
+            display: flex;
+            width: max-content;
+            animation: autoScroll 30s linear infinite;
+        }
+        .animate-slider:hover {
+            animation-play-state: paused;
+        }
+        body {
+            font-family: 'Inter', 'Cairo', sans-serif;
+            background-color: #0a172c;
+            color: #f3f4f6;
+        }
+    </style>
+</head>
+<body class="bg-navy-dark text-gray-100 antialiased selection:bg-gold selection:text-navy-dark">
+
+    <header class="sticky top-0 z-50 bg-navy/95 backdrop-blur-md border-b border-gold/20 shadow-xl transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-24 flex items-center justify-between">
+            <!-- Brand Logo / Title -->
+            <div class="flex items-center space-x-3 rtl:space-x-reverse">
+                <div id="brandLogoContainer" class="w-12 h-12 rounded-full bg-gold flex items-center justify-center text-navy-dark font-bold text-2xl shadow-lg border-2 border-white/20 overflow-hidden">
+                    <i class="fa-solid fa-utensils" id="brandLogoIcon"></i>
+                </div>
+                <div>
+                    <span class="block text-xs uppercase tracking-widest text-gold font-semibold lang-rest" data-en="RESTAURANT" data-ar="مطعم">RESTAURANT</span>
+                    <h1 id="brandTitle" class="text-2xl sm:text-3xl font-display font-bold text-gold tracking-wide">Chez Claudette</h1>
+                </div>
+            </div>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center space-x-8 rtl:space-x-reverse font-medium text-lg">
+                <a href="#home" class="text-gray-200 hover:text-gold transition lang-nav-home" data-en="Home" data-ar="الرئيسية">Home</a>
+                <a href="#about" class="text-gray-200 hover:text-gold transition lang-nav-about" data-en="About Us" data-ar="من نحن">About Us</a>
+                <a href="#menu" class="text-gray-200 hover:text-gold transition lang-nav-menu" data-en="Our Menu" data-ar="قائمة الطعام">Our Menu</a>
+                <a href="#reviews" class="text-gray-200 hover:text-gold transition lang-nav-reviews" data-en="Google Reviews" data-ar="تقييمات جوجل">Google Reviews</a>
+                <a href="#contact" class="text-gray-200 hover:text-gold transition lang-nav-contact" data-en="Contact" data-ar="اتصل بنا">Contact</a>
+            </nav>
+
+            <!-- Language Toggle & Mobile Hamburger -->
+            <div class="flex items-center space-x-4 rtl:space-x-reverse">
+                <button id="langToggleBtn" onclick="toggleLanguage()" class="bg-gold hover:bg-gold-light text-navy-dark font-bold px-4 py-2.5 rounded-xl shadow-md transition transform hover:scale-105 flex items-center space-x-2 rtl:space-x-reverse">
+                    <i class="fa-solid fa-globe"></i>
+                    <span id="langLabel" class="text-sm font-bold">العربية</span>
+                </button>
+                <button onclick="toggleMobileMenu()" class="md:hidden text-gold text-2xl p-2 focus:outline-none">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Nav Menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-navy-dark border-t border-gold/20 px-6 py-4 space-y-3">
+            <a href="#home" onclick="toggleMobileMenu()" class="block text-gray-200 hover:text-gold py-2 text-lg lang-nav-home" data-en="Home" data-ar="الرئيسية">Home</a>
+            <a href="#about" onclick="toggleMobileMenu()" class="block text-gray-200 hover:text-gold py-2 text-lg lang-nav-about" data-en="About Us" data-ar="من نحن">About Us</a>
+            <a href="#menu" onclick="toggleMobileMenu()" class="block text-gray-200 hover:text-gold py-2 text-lg lang-nav-menu" data-en="Our Menu" data-ar="قائمة الطعام">Our Menu</a>
+            <a href="#reviews" onclick="toggleMobileMenu()" class="block text-gray-200 hover:text-gold py-2 text-lg lang-nav-reviews" data-en="Google Reviews" data-ar="تقييمات جوجل">Google Reviews</a>
+            <a href="#services" onclick="toggleMobileMenu()" class="block text-gray-200 hover:text-gold py-2 text-lg lang-nav-services" data-en="Services & Info" data-ar="الخدمات والمعلومات">Services & Info</a>
+            <a href="#contact" onclick="toggleMobileMenu()" class="block text-gray-200 hover:text-gold py-2 text-lg lang-nav-contact" data-en="Contact" data-ar="اتصل بنا">Contact</a>
+        </div>
+    </header>
+
+    <section id="home" class="relative overflow-hidden bg-navy py-16 sm:py-24 border-b border-gold/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <span class="inline-block px-4 py-1.5 rounded-full bg-gold/10 text-gold border border-gold/30 text-sm font-semibold tracking-wider uppercase mb-6 animate-pulse lang-hero-badge" data-en="Authentic Canadian Diner & Poutine House" data-ar="مطعم كندي أصيل وبوتين فاخر">Authentic Canadian Diner & Poutine House</span>
+            <h2 class="text-4xl sm:text-6xl lg:text-7xl font-display font-bold text-white mb-6 leading-tight">
+                <span class="lang-hero-title1" data-en="Welcome to" data-ar="أهلاً بكم في">Welcome to</span> <span class="text-gold" id="heroRestaurantName">Chez Claudette</span>
+            </h2>
+            <p class="max-w-2xl mx-auto text-lg sm:text-xl text-gray-300 mb-10 lang-hero-desc" data-en="Experience legendary poutines, sizzling breakfasts, comforting casseroles, and hearty classics prepared with passion since decades." data-ar="استمتع بأشهى أطباق البوتين الأسطورية، الإفطار الساخن، والوجبات التقليدية المحضرة بكل شغف منذ عقود.">Experience legendary poutines, sizzling breakfasts, comforting casseroles, and hearty classics prepared with passion since decades.</p>
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                <a href="#menu" class="w-full sm:w-auto bg-gold hover:bg-gold-light text-navy-dark font-extrabold text-lg px-8 py-4 rounded-xl shadow-xl transition transform hover:scale-105 text-center lang-hero-btn1" data-en="Explore Our Menu" data-ar="استعرض قائمة الطعام">Explore Our Menu</a>
+                <a href="#contact" class="w-full sm:w-auto bg-transparent hover:bg-white/10 text-gold border-2 border-gold font-bold text-lg px-8 py-3.5 rounded-xl transition text-center lang-hero-btn2" data-en="Visit & Contact" data-ar="زورنا وتواصل معنا">Visit & Contact</a>
+            </div>
+        </div>
+
+        <!-- Automatic Moving Image Slider (No Arrows) -->
+        <div class="mt-16 relative overflow-hidden w-full py-4 bg-navy-dark/60 border-y border-gold/20">
+            <div id="sliderContainer" class="animate-slider flex space-x-6 rtl:space-x-reverse px-3">
+                <!-- Slider items rendered dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-20 bg-navy-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <span class="text-gold font-bold tracking-widest uppercase text-sm lang-about-subtitle" data-en="Our Heritage & Tradition" data-ar="تراثنا وعراقتنا">Our Heritage & Tradition</span>
+                    <h3 class="text-3xl sm:text-4xl font-display font-bold text-white mt-2 mb-6 lang-about-title" data-en="A Beloved Tradition of Great Taste & Warm Hospitality" data-ar="تقاليد محبوبة من المذاق الرائع وحسن الضيافة">A Beloved Tradition of Great Taste & Warm Hospitality</h3>
+                    <p class="text-gray-300 text-lg mb-6 leading-relaxed lang-about-desc1" data-en="Restaurant Chez Claudette has been serving comforting local favorites with unmatched quality and friendly warmth. From our signature golden poutines dripping with rich gravy and fresh cheese curds to hearty breakfasts and classic casseroles, every dish tells a story of authentic culinary dedication." data-ar="يقدم مطعم شيز كلوديت الأطباق المحلية المفضلة بجودة لا مثيل لها ودفء ترحيبي. من أطباق البوتين الذهبية الغنية بالصلصة وجبن القريش الطازج إلى وجبات الإفطار الشهية والأطباق الساخنة، كل طبق يروي قصة تفاني طهي أصيل.">Restaurant Chez Claudette has been serving comforting local favorites with unmatched quality and friendly warmth. From our signature golden poutines dripping with rich gravy and fresh cheese curds to hearty breakfasts and classic casseroles, every dish tells a story of authentic culinary dedication.</p>
+                    <div class="grid grid-cols-2 gap-6 mt-8">
+                        <div class="bg-navy p-6 rounded-2xl border border-gold/20 shadow-lg">
+                            <h4 class="text-3xl font-extrabold text-gold mb-1">100%</h4>
+                            <p class="text-gray-300 font-medium" data-en="Fresh Ingredients" data-ar="مكونات طازجة 100%">Fresh Ingredients</p>
+                        </div>
+                        <div class="bg-navy p-6 rounded-2xl border border-gold/20 shadow-lg">
+                            <h4 class="text-3xl font-extrabold text-gold mb-1">24/7</h4>
+                            <p class="text-gray-300 font-medium" data-en="Authentic Taste" data-ar="مذاق أصيل دائماً">Authentic Taste</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div class="rounded-3xl overflow-hidden shadow-2xl border-4 border-gold/30">
+                        <img src="https://placehold.co/600x500/102340/F5BE3B?text=Restaurant+Interior" alt="Restaurant Chez Claudette" class="w-full h-auto object-cover">
+                    </div>
+                    <div class="absolute -bottom-6 -left-6 bg-gold text-navy-dark p-6 rounded-2xl shadow-2xl hidden sm:block border-2 border-white/20">
+                        <p class="font-display font-bold text-2xl">Chez Claudette</p>
+                        <p class="text-sm font-semibold tracking-wider uppercase" data-en="Since Decades of Excellence" data-ar="عقود من التميز العريق">Since Decades of Excellence</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="menu" class="py-20 bg-navy border-t border-gold/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-gold font-bold tracking-widest uppercase text-sm lang-menu-subtitle" data-en="Discover Our Offerings" data-ar="استكشف قوائم طعامنا">Discover Our Offerings</span>
+                <h3 class="text-3xl sm:text-5xl font-display font-bold text-white mt-2 mb-4 lang-menu-title" data-en="Our Special Menu Categories" data-ar="فئات قائمتنا المميزة">Our Special Menu Categories</h3>
+                <p class="text-gray-300 text-lg lang-menu-desc" data-en="Explore our extensive selection categorized for your cravings, crafted with the authentic spirit of Chez Claudette." data-ar="تصفح تشكيلتنا الواسعة المصممة لتلبي كافة رغباتك بروح شيز كلوديت الأصيلة.">Explore our extensive selection categorized for your cravings, crafted with the authentic spirit of Chez Claudette.</p>
+            </div>
+
+            <!-- Category Tabs Navigation -->
+            <div id="categoryTabs" class="flex flex-wrap justify-center gap-3 mb-12">
+                <!-- Tabs populated by JS -->
+            </div>
+
+            <!-- Menu Items Container -->
+            <div id="menuItemsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Dynamically filled items with product images -->
+            </div>
+        </div>
+    </section>
+
+    <!-- GOOGLE MAPS REVIEWS SECTION -->
+    <section id="reviews" class="py-20 bg-navy-dark border-t border-gold/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <div class="inline-flex items-center space-x-2 rtl:space-x-reverse bg-gold/10 px-4 py-2 rounded-full border border-gold/30 text-gold mb-4">
+                    <i class="fa-brands fa-google text-lg"></i>
+                    <span class="font-bold text-sm" data-en="Verified Google Maps Reviews" data-ar="تقييمات موثقة من خرائط جوجل">Verified Google Maps Reviews</span>
+                </div>
+                <h3 class="text-3xl sm:text-5xl font-display font-bold text-white mb-4" data-en="What Our Customers Say" data-ar="ما يقوله عملاؤنا عنا">What Our Customers Say</h3>
+                <p class="text-gray-300 text-lg" data-en="Read authentic experiences and reviews shared by our wonderful guests on Google Maps." data-ar="اقرأ التجارب والتقييمات الحقيقية التي مشاركتها من قبل ضيوفنا الكرام على خرائط جوجل.">Read authentic experiences and reviews shared by our wonderful guests on Google Maps.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Review Card 1 -->
+                <div class="bg-navy p-6 rounded-3xl border border-gold/20 shadow-xl flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center space-x-3 rtl:space-x-reverse">
+                                <div class="w-12 h-12 rounded-full bg-emerald-600 text-white font-bold text-lg flex items-center justify-center shadow-md">RG</div>
+                                <div>
+                                    <h4 class="font-bold text-white text-base">RG</h4>
+                                    <span class="text-xs text-gold/80" data-en="Local Guide &bull; 331 reviews" data-ar="مرشد محلي &bull; 331 تقييم">Local Guide &bull; 331 reviews</span>
+                                </div>
+                            </div>
+                            <div class="text-gold flex space-x-0.5 text-sm"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                        </div>
+                        <p class="text-gray-300 text-sm sm:text-base mb-4 leading-relaxed" data-en="&ldquo;This was an excellent excellent experience. We stopped by for lunch on our way out of Mtl and had the best time grabbing brunch here...&rdquo;" data-ar="&ldquo;كانت تجربة ممتازة جداً. توقفنا لتناول الغداء في طريقنا خارج مونتريال وقضينا وقتاً ممتعاً للغاية...&rdquo;">&ldquo;This was an excellent excellent experience...&rdquo;</p>
+                    </div>
+                    <div class="border-t border-gold/10 pt-4 flex items-center justify-between text-xs text-gray-400">
+                        <span class="bg-gold/10 text-gold px-2.5 py-1 rounded-md">Dine-in &bull; Brunch</span>
+                        <span class="flex items-center space-x-1 text-red-400"><i class="fa-solid fa-heart"></i><span>1</span></span>
+                    </div>
+                </div>
+                <!-- Review Card 2 -->
+                <div class="bg-navy p-6 rounded-3xl border border-gold/20 shadow-xl flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center space-x-3 rtl:space-x-reverse">
+                                <div class="w-12 h-12 rounded-full bg-cyan-600 text-white font-bold text-lg flex items-center justify-center shadow-md">MM</div>
+                                <div>
+                                    <h4 class="font-bold text-white text-base">Mon M.</h4>
+                                    <span class="text-xs text-gold/80" data-en="Local Guide &bull; 175 reviews" data-ar="مرشد محلي &bull; 175 تقييم">Local Guide &bull; 175 reviews</span>
+                                </div>
+                            </div>
+                            <div class="text-gold flex space-x-0.5 text-sm"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i></div>
+                        </div>
+                        <p class="text-gray-300 text-sm sm:text-base mb-4 leading-relaxed" data-en="&ldquo;Restaurant Chez Claudette is one of the hidden spots for authentic Québécois comfort food in Montreal...&rdquo;" data-ar="&ldquo;مطعم شيز كلوديت هو أحد الأماكن الخفية الرائعة للطعام الكيبيكي التقليدي الأصيل...&rdquo;">&ldquo;Restaurant Chez Claudette is one of the hidden spots...&rdquo;</p>
+                    </div>
+                    <div class="border-t border-gold/10 pt-4 flex items-center justify-between text-xs text-gray-400">
+                        <span class="bg-gold/10 text-gold px-2.5 py-1 rounded-md">Dine-in &bull; Diner</span>
+                        <span class="flex items-center space-x-1 text-red-400"><i class="fa-solid fa-heart"></i><span>2</span></span>
+                    </div>
+                </div>
+                <!-- Review Card 3 -->
+                <div class="bg-navy p-6 rounded-3xl border border-gold/20 shadow-xl flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center space-x-3 rtl:space-x-reverse">
+                                <div class="w-12 h-12 rounded-full bg-amber-600 text-white font-bold text-lg flex items-center justify-center shadow-md">AC</div>
+                                <div>
+                                    <h4 class="font-bold text-white text-base">Annick Chenard</h4>
+                                    <span class="text-xs text-gold/80" data-en="Local Guide &bull; 10 reviews" data-ar="مرشد محلي &bull; 10 تقييمات">Local Guide &bull; 10 reviews</span>
+                                </div>
+                            </div>
+                            <div class="text-gold flex space-x-0.5 text-sm"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i></div>
+                        </div>
+                        <p class="text-gray-300 text-sm sm:text-base mb-4 leading-relaxed" data-en="&ldquo;I went for a poutine at lunchtime. The fries are perfect but it stops there...&rdquo;" data-ar="&ldquo;ذهبت لتناول البوتين وقت الغداء. البطاطس مقرمشة ومثالية...&rdquo;">&ldquo;I went for a poutine at lunchtime...&rdquo;</p>
+                    </div>
+                    <div class="border-t border-gold/10 pt-4 flex items-center justify-between text-xs text-gray-400">
+                        <span class="bg-gold/10 text-gold px-2.5 py-1 rounded-md">Lunch &bull; Poutine</span>
+                        <span class="flex items-center space-x-1 text-red-400"><i class="fa-solid fa-heart"></i><span>2</span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services & Amenities Section -->
+    <section id="services" class="py-20 bg-navy border-t border-gold/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-gold font-bold tracking-widest uppercase text-sm" data-en="Features & Offerings" data-ar="المميزات والخدمات">Features & Offerings</span>
+                <h3 class="text-3xl sm:text-5xl font-display font-bold text-white mt-2 mb-4" data-en="Services & Amenities" data-ar="خدماتنا ووسائل الراحة">Services & Amenities</h3>
+                <p class="text-gray-300 text-lg" data-en="Everything you need to know about our dining experience, payment options, and atmosphere." data-ar="كل ما تحتاج معرفته عن تجربة تناول الطعام لدينا، خيارات الدفع، والأجواء المميزة.">Everything you need to know about our dining experience, payment options, and atmosphere.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-navy-dark p-6 rounded-2xl border border-gold/20 shadow-xl">
+                    <div class="flex items-center space-x-3 rtl:space-x-reverse text-gold text-xl font-bold mb-4">
+                        <i class="fa-solid fa-bell-concierge"></i>
+                        <h4 class="text-white" data-en="Service Options" data-ar="خيارات الخدمة">Service Options</h4>
+                    </div>
+                    <ul class="space-y-2 text-gray-300 text-sm sm:text-base">
+                        <li class="flex items-center space-x-2 rtl:space-x-reverse"><i class="fa-solid fa-check text-gold"></i><span data-en="Outdoor Terrace" data-ar="جلسات خارجية (تراس)">Outdoor Terrace</span></li>
+                        <li class="flex items-center space-x-2 rtl:space-x-reverse"><i class="fa-solid fa-check text-gold"></i><span data-en="Home Delivery" data-ar="توصيل للمنازل">Home Delivery</span></li>
+                        <li class="flex items-center space-x-2 rtl:space-x-reverse"><i class="fa-solid fa-check text-gold"></i><span data-en="Dine-in Service" data-ar="تناول الطعام بالمطعم">Dine-in Service</span></li>
+                        <li class="flex items-center space-x-2 rtl:space-x-reverse"><i class="fa-solid fa-check text-gold"></i><span data-en="Takeout Available" data-ar="طلب سفري">Takeout Available</span></li>
+                    </ul>
+                </div>
+                <div class="bg-navy-dark p-6 rounded-2xl border border-gold/20 shadow-xl">
+                    <div class="flex items-center space-x-3 rtl:space-x-reverse text-gold text-xl font-bold mb-4">
+                        <i class="fa-solid fa-utensils"></i>
+                        <h4 class="text-white" data-en="Offerings & Meals" data-ar="العروض والوجبات">Offerings & Meals</h4>
+                    </div>
+                    <ul class="space-y-2 text-gray-300 text-sm sm:text-base">
+                        <li class="flex items-center space-x-2 rtl:space-x-reverse"><i class="fa-solid fa-check text-gold"></i><span data-en="Breakfast, Brunch, Lunch & Dinner" data-ar="إفطار، برنش، غداء وعشاء">Breakfast, Brunch, Lunch & Dinner</span></li>
+                        <li class="flex items-center space-x-2 rtl:space-x-reverse"><i class="fa-solid fa-check text-gold"></i><span data-en="Late-Night Food Options" data-ar="وجبات متأخرة بالليل">Late-Night Food Options</span></li>
+                        <li class="flex items-center space-x-2 rtl:space-x-reverse"><i class="fa-solid fa-check text-gold"></i><span data-en="Vegetarian Options Available" data-ar="خيارات مناسبة للنباتيين">Vegetarian Options Available</span></li>
+                    </ul>
+                </div>
+                <div class="bg-navy-dark p-6 rounded-2xl border border-gold/20 shadow-xl">
+                    <div class="flex items-center space-x-3 rtl:space-x-reverse text-gold text-xl font-bold mb-4">
+                        <i class="fa-solid fa-users"></i>
+                        <h4 class="text-white" data-en="Atmosphere & Crowd" data-ar="الأجواء والعملاء">Atmosphere & Crowd</h4>
+                    </div>
+                    <ul class="space-y-2 text-gray-300 text-sm sm:text-base">
+                        <li class="flex items-center space-x-2 rtl:space-x-reverse"><i class="fa-solid fa-check text-gold"></i><span data-en="Casual & Relaxed Atmosphere" data-ar="أجواء مريحة وغير رسمية">Casual & Relaxed Atmosphere</span></li>
+                        <li class="flex items-center space-x-2 rtl:space-x-reverse"><i class="fa-solid fa-check text-gold"></i><span data-en="Cozy & Pleasant Setting" data-ar="مكان لطيف ومريح">Cozy & Pleasant Setting</span></li>
+                        <li class="flex items-center space-x-2 rtl:space-x-reverse"><i class="fa-solid fa-check text-gold"></i><span data-en="Great for Groups & Students" data-ar="مناسب للمجموعات والطلاب">Great for Groups & Students</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Hours Section -->
+    <section id="contact" class="py-20 bg-navy-dark border-t border-gold/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div>
+                    <span class="text-gold font-bold tracking-widest uppercase text-sm" data-en="Get In Touch & Schedule" data-ar="تواصل معنا وأوقات العمل">Get In Touch & Schedule</span>
+                    <h3 class="text-3xl sm:text-4xl font-display font-bold text-white mt-2 mb-6" data-en="Visit Us Or Place an Order" data-ar="زورنا أو اطلب وجبتك المفضلة">Visit Us Or Place an Order</h3>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start space-x-4 rtl:space-x-reverse bg-navy p-5 rounded-2xl border border-gold/20 shadow-md">
+                            <div class="w-12 h-12 rounded-xl bg-gold text-navy-dark flex items-center justify-center text-xl flex-shrink-0">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white text-lg" data-en="Full Address" data-ar="العنوان الكامل">Full Address</h4>
+                                <p class="text-gray-300 font-medium">351 Avenue Laurier Est, Montréal, QC H2T 1G7, Canada</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4 rtl:space-x-reverse bg-navy p-5 rounded-2xl border border-gold/20 shadow-md">
+                            <div class="w-12 h-12 rounded-xl bg-gold text-navy-dark flex items-center justify-center text-xl flex-shrink-0">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white text-lg" data-en="Phone Number" data-ar="رقم الهاتف">Phone Number</h4>
+                                <p class="text-gray-300 font-medium" dir="ltr">+1 514-279-5173</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-navy p-8 sm:p-10 rounded-3xl border-2 border-gold/30 shadow-2xl">
+                    <h4 class="text-2xl font-display font-bold text-white mb-6" data-en="Send Us a Message" data-ar="أرسل لنا رسالة">Send Us a Message</h4>
+                    <form onsubmit="handleFormSubmit(event)" class="space-y-6">
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-300 mb-2" data-en="Your Name" data-ar="اسمك الكريم">Your Name</label>
+                            <input type="text" required class="w-full bg-navy-dark border border-gold/30 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold transition">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-300 mb-2" data-en="Email Address" data-ar="البريد الإلكتروني">Email Address</label>
+                            <input type="email" required class="w-full bg-navy-dark border border-gold/30 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold transition">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-300 mb-2" data-en="Your Message / Order Note" data-ar="رسالتك أو ملاحظة الطلب">Your Message / Order Note</label>
+                            <textarea rows="4" required class="w-full bg-navy-dark border border-gold/30 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold transition"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-gold hover:bg-gold-light text-navy-dark font-extrabold text-lg py-4 rounded-xl shadow-xl transition transform hover:scale-105" data-en="Send Message Now" data-ar="إرسال الرسالة الآن">Send Message Now</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER WITH RESTAURANT NAME & COMPANY CREDIT -->
+    <footer class="bg-navy border-t border-gold/20 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
+            
+            <!-- Restaurant Name Text Instead of Button -->
+            <div class="text-xl font-display font-bold text-gold" id="footerBrandName">
+                Restaurant Chez Claudette
+            </div>
+            
+            <!-- Admin Control Panel Trigger Button -->
+            <div>
+                <button onclick="openAdminModal()" class="bg-gold/20 hover:bg-gold hover:text-navy-dark text-gold border border-gold font-bold px-6 py-3 rounded-xl transition flex items-center space-x-2 rtl:space-x-reverse shadow-lg transform hover:scale-105">
+                    <i class="fa-solid fa-gears"></i>
+                    <span data-en="Admin Control Panel" data-ar="لوحة التحكم الإدارية">Admin Control Panel</span>
+                </button>
+            </div>
+
+            <!-- Company Credit -->
+            <div class="text-gray-400 text-xs tracking-wider uppercase font-semibold">
+                BY PROO OF CONCEPT
+            </div>
+        </div>
+    </footer>
+
+    <!-- AUTHENTICATION & ADMIN MODAL DIALOG -->
+    <!-- 1. Login Modal -->
+    <div id="loginModal" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="bg-navy-dark border-2 border-gold rounded-3xl max-w-md w-full p-8 shadow-2xl">
+            <div class="text-center mb-6">
+                <div class="w-16 h-16 rounded-full bg-gold/10 text-gold border border-gold/30 mx-auto flex items-center justify-center text-2xl mb-3">
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+                <h3 class="text-2xl font-bold font-display text-white" data-en="Admin Login" data-ar="تسجيل دخول الإدارة">Admin Login</h3>
+                <p class="text-xs text-gray-400 mt-1">Enter credentials (admin / adminnezar)</p>
+            </div>
+            <form onsubmit="handleAdminLogin(event)" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-semibold text-gray-300 mb-1" data-en="Username" data-ar="اسم المستخدم">Username</label>
+                    <input type="text" id="loginUser" required class="w-full bg-navy border border-gold/30 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold" placeholder="admin">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-gray-300 mb-1" data-en="Password" data-ar="كلمة المرور">Password</label>
+                    <input type="password" id="loginPass" required class="w-full bg-navy border border-gold/30 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold" placeholder="adminnezar">
+                </div>
+                <div id="loginError" class="hidden text-red-400 text-xs text-center font-bold">Invalid username or password!</div>
+                <div class="flex gap-3 pt-2">
+                    <button type="button" onclick="closeLoginModal()" class="flex-1 bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 rounded-xl transition" data-en="Cancel" data-ar="إلغاء">Cancel</button>
+                    <button type="submit" class="flex-1 bg-gold hover:bg-gold-light text-navy-dark font-extrabold py-3 rounded-xl transition shadow-lg" data-en="Login" data-ar="دخول">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 2. Admin Management Dashboard Modal -->
+    <div id="adminModal" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-navy-dark border-2 border-gold rounded-3xl max-w-4xl w-full shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+            
+            <div class="bg-navy px-6 py-5 border-b border-gold/20 flex justify-between items-center">
+                <div class="flex items-center space-x-3 rtl:space-x-reverse text-gold">
+                    <i class="fa-solid fa-gauge-high text-2xl"></i>
+                    <h3 class="text-2xl font-bold font-display" data-en="Admin Management Console" data-ar="لوحة التحكم الإدارية">Admin Management Console</h3>
+                </div>
+                <button onclick="closeAdminModal()" class="text-gray-400 hover:text-white text-2xl bg-white/5 hover:bg-white/10 w-10 h-10 rounded-full flex items-center justify-center transition">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="bg-navy/50 px-6 py-3 border-b border-gold/10 flex gap-3 overflow-x-auto">
+                <button onclick="switchAdminTab('brand')" id="admTabBtn_brand" class="px-5 py-2.5 rounded-xl font-bold text-sm transition bg-gold text-navy-dark shadow">
+                    <i class="fa-solid fa-store mr-1.5"></i> <span data-en="Branding & Logo" data-ar="الشعار والهوية">Branding & Logo</span>
+                </button>
+                <button onclick="switchAdminTab('slider')" id="admTabBtn_slider" class="px-5 py-2.5 rounded-xl font-bold text-sm transition bg-navy text-gray-300 hover:bg-gold/20 border border-gold/20">
+                    <i class="fa-solid fa-images mr-1.5"></i> <span data-en="Slider Images" data-ar="صور السلايدر">Slider Images</span>
+                </button>
+                <button onclick="switchAdminTab('menu')" id="admTabBtn_menu" class="px-5 py-2.5 rounded-xl font-bold text-sm transition bg-navy text-gray-300 hover:bg-gold/20 border border-gold/20">
+                    <i class="fa-solid fa-utensils mr-1.5"></i> <span data-en="Menu & Products" data-ar="الأطباق والمنتجات">Menu & Products</span>
+                </button>
+            </div>
+
+            <div class="p-6 sm:p-8 space-y-6 overflow-y-auto flex-1">
+                
+                <!-- Tab 1: Branding -->
+                <div id="admTabContent_brand" class="space-y-4">
+                    <h4 class="text-lg font-bold text-gold border-b border-gold/20 pb-2" data-en="General Restaurant Branding" data-ar="الهوية العامة للمطعم">General Restaurant Branding</h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-300 mb-1.5" data-en="Restaurant Name" data-ar="اسم المطعم">Restaurant Name</label>
+                            <input type="text" id="adminRestName" class="w-full bg-navy border border-gold/30 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-300 mb-1.5" data-en="Logo Image URL" data-ar="رابط صورة الشعار (Logo URL)">Logo Image URL</label>
+                            <input type="text" id="adminLogoUrl" class="w-full bg-navy border border-gold/30 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold" placeholder="https://...">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab 2: Slider -->
+                <div id="admTabContent_slider" class="hidden space-y-4">
+                    <h4 class="text-lg font-bold text-gold border-b border-gold/20 pb-2" data-en="Automatic Slider Banners" data-ar="بنرات السلايدر المتحرك">Automatic Slider Banners</h4>
+                    <div id="sliderInputsContainer" class="space-y-4"></div>
+                </div>
+
+                <!-- Tab 3: Menu & Products -->
+                <div id="admTabContent_menu" class="hidden space-y-6">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-gold/20 pb-4">
+                        <div class="flex gap-2 overflow-x-auto w-full sm:w-auto" id="adminCategoryTabs"></div>
+                        <div class="flex gap-2 w-full sm:w-auto">
+                            <button onclick="addNewCategoryModal()" class="flex-1 sm:flex-none bg-gold/20 hover:bg-gold hover:text-navy-dark text-gold border border-gold px-4 py-2 rounded-xl text-xs font-bold transition flex items-center justify-center space-x-1 rtl:space-x-reverse">
+                                <i class="fa-solid fa-folder-plus"></i>
+                                <span data-en="Add New Branch / Category" data-ar="إضافة فرع / قسم جديد">Add New Branch</span>
+                            </button>
+                            <button onclick="addNewProductModal()" class="flex-1 sm:flex-none bg-gold text-navy-dark hover:bg-gold-light px-4 py-2 rounded-xl text-xs font-extrabold transition flex items-center justify-center space-x-1 rtl:space-x-reverse shadow-md">
+                                <i class="fa-solid fa-plus"></i>
+                                <span data-en="Add New Product" data-ar="إضافة منتج جديد">Add New Product</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div id="adminMenuItemsList" class="space-y-4 pr-1"></div>
+                </div>
+
+            </div>
+
+            <div class="bg-navy px-6 py-4 border-t border-gold/20 flex justify-end space-x-3 rtl:space-x-reverse">
+                <button onclick="closeAdminModal()" class="px-6 py-3 rounded-xl bg-gray-700 hover:bg-gray-600 text-white font-bold transition" data-en="Cancel" data-ar="إلغاء">Cancel</button>
+                <button onclick="saveAdminChanges()" class="px-8 py-3 rounded-xl bg-gold hover:bg-gold-light text-navy-dark font-extrabold transition shadow-lg flex items-center space-x-2 rtl:space-x-reverse">
+                    <i class="fa-solid fa-check"></i>
+                    <span data-en="Save & Apply Changes" data-ar="حفظ وتطبيق التغييرات">Save & Apply Changes</span>
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        let restaurantData = {
+            name: "Chez Claudette",
+            logoUrl: "",
+            sliderImages: [
+                { img: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=600&auto=format&fit=crop&q=80", titleEn: "Legendary Poutines", titleAr: "بوتين الأسطورية", tagEn: "Signature", tagAr: "مميز" },
+                { img: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&auto=format&fit=crop&q=80", titleEn: "Casse-Croûte Trios", titleAr: "وجبات كاس-كروت الثلاثية", tagEn: "Combo", tagAr: "وجبة متكاملة" },
+                { img: "https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?w=600&auto=format&fit=crop&q=80", titleEn: "Omelettes & Breakfasts", titleAr: "عجة وفطورات ساخنة", tagEn: "Morning", tagAr: "صباحي" },
+                { img: "https://images.unsplash.com/photo-1550547660-d9450f859349?w=600&auto=format&fit=crop&q=80", titleEn: "Sandwiches & Salads", titleAr: "سندويشات وسلطات", tagEn: "Fresh", tagAr: "طازج" }
+            ],
+            menuCategories: [
+                {
+                    id: "poutines",
+                    nameEn: "Poutines",
+                    nameAr: "البوتين (Poutines)",
+                    icon: "fa-bowl-food",
+                    items: [
+                        { nameEn: "Traditional Poutine", nameAr: "بوتين تقليدية أصيلة", descEn: "Crispy fries, fresh cheese curds, and rich hot gravy.", descAr: "بطاطس مقرمشة، جبن قريش طازج، وصلصة ساخنة غنية.", price: "$11.50", img: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=500&auto=format&fit=crop&q=80" },
+                        { nameEn: "The 5 Stars Poutine", nameAr: "بوتين الـ 5 نجوم الفاخرة", descEn: "Loaded with extra cheese curds, savory bacon, and house special sauce.", descAr: "محملة بجبن إضافي، لحم مقدد، وصلصة المطعم الخاصة.", price: "$14.75", img: "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?w=500&auto=format&fit=crop&q=80" }
+                    ]
+                },
+                {
+                    id: "sandwiches",
+                    nameEn: "Sandwiches",
+                    nameAr: "السندويشات",
+                    icon: "fa-hotdog",
+                    items: [
+                        { nameEn: "BLT Sandwich", nameAr: "ساندويتش بي إل تي (B.L.T)", descEn: "Crispy bacon, fresh lettuce, and juicy tomatoes on toasted bread.", descAr: "بكن مقرمش، خس طازج، وطماطم غنية على خبز محمص.", price: "$8.50", img: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=500&auto=format&fit=crop&q=80" }
+                    ]
+                }
+            ]
+        };
+
+        let currentLang = 'en';
+        let activeCategory = 'poutines';
+        let adminActiveCat = 'poutines';
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'ar' : 'en';
+            const htmlTag = document.documentElement;
+            if (currentLang === 'ar') {
+                htmlTag.setAttribute('dir', 'rtl');
+                htmlTag.setAttribute('lang', 'ar');
+                document.getElementById('langLabel').innerText = 'English';
+            } else {
+                htmlTag.setAttribute('dir', 'ltr');
+                htmlTag.setAttribute('lang', 'en');
+                document.getElementById('langLabel').innerText = 'العربية';
+            }
+            updateTextContent();
+            renderAll();
+        }
+
+        function updateTextContent() {
+            document.querySelectorAll('[data-en]').forEach(el => {
+                const text = el.getAttribute(`data-${currentLang}`);
+                if (text) {
+                    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                        el.placeholder = text;
+                    } else {
+                        el.innerHTML = text;
+                    }
+                }
+            });
+        }
+
+        function renderAll() {
+            document.getElementById('brandTitle').innerText = restaurantData.name;
+            document.getElementById('heroRestaurantName').innerText = restaurantData.name;
+            document.getElementById('footerBrandName').innerText = restaurantData.name;
+            
+            const logoContainer = document.getElementById('brandLogoContainer');
+            if (restaurantData.logoUrl) {
+                logoContainer.innerHTML = `<img src="${restaurantData.logoUrl}" alt="Logo" class="w-full h-full object-cover">`;
+            } else {
+                logoContainer.innerHTML = `<i class="fa-solid fa-utensils"></i>`;
+            }
+
+            // Render Slider
+            const sliderContainer = document.getElementById('sliderContainer');
+            let sliderHTML = '';
+            const itemsToRender = [...restaurantData.sliderImages, ...restaurantData.sliderImages];
+            itemsToRender.forEach(slide => {
+                sliderHTML += `
+                    <div class="flex-shrink-0 w-80 sm:w-96 h-64 rounded-2xl overflow-hidden shadow-2xl relative group border-2 border-gold/30">
+                        <img src="${slide.img}" alt="Slider Img" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-navy-dark via-transparent to-transparent flex items-end p-6">
+                            <div>
+                                <span class="text-xs uppercase bg-gold text-navy-dark font-bold px-2.5 py-1 rounded-md">${currentLang === 'ar' ? slide.tagAr : slide.tagEn}</span>
+                                <h4 class="text-xl font-bold text-white mt-1">${currentLang === 'ar' ? slide.titleAr : slide.titleEn}</h4>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            sliderContainer.innerHTML = sliderHTML;
+
+            // Render Menu Tabs
+            const catContainer = document.getElementById('categoryTabs');
+            catContainer.innerHTML = '';
+            restaurantData.menuCategories.forEach(cat => {
+                const isActive = cat.id === activeCategory;
+                const btn = document.createElement('button');
+                btn.className = `px-6 py-3 rounded-xl font-bold text-base transition flex items-center space-x-2 rtl:space-x-reverse ${
+                    isActive ? 'bg-gold text-navy-dark shadow-lg scale-105' : 'bg-navy-dark text-gray-300 hover:bg-gold/20 border border-gold/20'
+                }`;
+                btn.innerHTML = `<i class="fa-solid ${cat.icon}"></i><span>${currentLang === 'ar' ? cat.nameAr : cat.nameEn}</span>`;
+                btn.onclick = () => {
+                    activeCategory = cat.id;
+                    renderAll();
+                };
+                catContainer.appendChild(btn);
+            });
+
+            // Render Menu Items with Product Images
+            const menuContainer = document.getElementById('menuItemsContainer');
+            menuContainer.innerHTML = '';
+            const category = restaurantData.menuCategories.find(c => c.id === activeCategory);
+            if (category) {
+                category.items.forEach(item => {
+                    const card = document.createElement('div');
+                    card.className = 'bg-navy-dark rounded-2xl overflow-hidden border border-gold/20 shadow-xl hover:border-gold transition duration-300 flex flex-col justify-between transform hover:-translate-y-1';
+                    card.innerHTML = `
+                        <div>
+                            <div class="h-48 overflow-hidden relative border-b border-gold/20">
+                                <img src="${item.img}" alt="Product" class="w-full h-full object-cover hover:scale-110 transition duration-500">
+                                <span class="absolute top-3 right-3 bg-navy-dark/90 text-gold font-extrabold text-base px-3 py-1 rounded-xl border border-gold/30 shadow-lg">${item.price}</span>
+                            </div>
+                            <div class="p-6">
+                                <h4 class="text-xl font-bold text-white font-display mb-2">${currentLang === 'ar' ? item.nameAr : item.nameEn}</h4>
+                                <p class="text-gray-300 text-sm sm:text-base">${currentLang === 'ar' ? item.descAr : item.descEn}</p>
+                            </div>
+                        </div>
+                        <div class="p-6 pt-0">
+                            <button onclick="orderItem('${item.nameEn}')" class="w-full bg-gold/20 hover:bg-gold hover:text-navy-dark text-gold font-bold py-3 rounded-xl transition flex items-center justify-center space-x-2 rtl:space-x-reverse shadow-md">
+                                <i class="fa-solid fa-cart-plus"></i>
+                                <span>${currentLang === 'ar' ? 'اطلب الآن' : 'Order Item'}</span>
+                            </button>
+                        </div>
+                    `;
+                    menuContainer.appendChild(card);
+                });
+            }
+        }
+
+        // Authentication Flow
+        function openAdminModal() {
+            document.getElementById('loginModal').classList.remove('hidden');
+            document.getElementById('loginUser').value = '';
+            document.getElementById('loginPass').value = '';
+            document.getElementById('loginError').classList.add('hidden');
+        }
+
+        function closeLoginModal() {
+            document.getElementById('loginModal').classList.add('hidden');
+        }
+
+        function handleAdminLogin(e) {
+            e.preventDefault();
+            const u = document.getElementById('loginUser').value;
+            const p = document.getElementById('loginPass').value;
+
+            if (u === 'admin' && p === 'adminnezar') {
+                closeLoginModal();
+                document.getElementById('adminModal').classList.remove('hidden');
+                document.getElementById('adminRestName').value = restaurantData.name;
+                document.getElementById('adminLogoUrl').value = restaurantData.logoUrl;
+                renderAdminSliderInputs();
+                renderAdminCategoryTabs();
+                renderAdminMenuItems();
+                switchAdminTab('brand');
+            } else {
+                document.getElementById('loginError').classList.remove('hidden');
+            }
+        }
+
+        function closeAdminModal() {
+            document.getElementById('adminModal').classList.add('hidden');
+        }
+
+        function switchAdminTab(tabName) {
+            ['brand', 'slider', 'menu'].forEach(t => {
+                document.getElementById(`admTabContent_${t}`).classList.add('hidden');
+                document.getElementById(`admTabBtn_${t}`).className = "px-5 py-2.5 rounded-xl font-bold text-sm transition bg-navy text-gray-300 hover:bg-gold/20 border border-gold/20";
+            });
+            document.getElementById(`admTabContent_${tabName}`).classList.remove('hidden');
+            document.getElementById(`admTabBtn_${tabName}`).className = "px-5 py-2.5 rounded-xl font-bold text-sm transition bg-gold text-navy-dark shadow";
+        }
+
+        function renderAdminSliderInputs() {
+            const container = document.getElementById('sliderInputsContainer');
+            container.innerHTML = '';
+            restaurantData.sliderImages.forEach((slide, idx) => {
+                container.innerHTML += `
+                    <div class="bg-navy p-4 rounded-2xl border border-gold/20 flex flex-col sm:flex-row items-center gap-4">
+                        <img src="${slide.img}" class="w-20 h-16 rounded-xl object-cover border border-gold/30">
+                        <div class="flex-1 w-full space-y-2">
+                            <input type="text" id="sliderImg_${idx}" class="w-full bg-navy-dark border border-gold/30 rounded-xl px-3 py-2 text-sm text-white" value="${slide.img}" placeholder="Image URL">
+                            <input type="text" id="sliderTitle_${idx}" class="w-full bg-navy-dark border border-gold/30 rounded-xl px-3 py-2 text-sm text-white" value="${slide.titleEn}" placeholder="Title">
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function renderAdminCategoryTabs() {
+            const container = document.getElementById('adminCategoryTabs');
+            container.innerHTML = '';
+            restaurantData.menuCategories.forEach(cat => {
+                const isActive = cat.id === adminActiveCat;
+                const btn = document.createElement('button');
+                btn.className = `px-4 py-2 rounded-xl text-xs font-bold transition flex items-center space-x-1 rtl:space-x-reverse ${isActive ? 'bg-gold text-navy-dark' : 'bg-navy-dark text-gray-300 border border-gold/20'}`;
+                btn.innerHTML = `<span>${cat.nameEn}</span> <i onclick="deleteCategory('${cat.id}', event)" class="fa-solid fa-trash-can text-red-400 hover:text-red-600 ml-1"></i>`;
+                btn.onclick = (e) => {
+                    if(e.target.tagName === 'I') return;
+                    adminActiveCat = cat.id;
+                    renderAdminCategoryTabs();
+                    renderAdminMenuItems();
+                };
+                container.appendChild(btn);
+            });
+        }
+
+        function renderAdminMenuItems() {
+            const container = document.getElementById('adminMenuItemsList');
+            container.innerHTML = '';
+            const cat = restaurantData.menuCategories.find(c => c.id === adminActiveCat);
+            if (!cat) return;
+
+            cat.items.forEach((item, idx) => {
+                container.innerHTML += `
+                    <div class="bg-navy p-4 rounded-2xl border border-gold/20 flex flex-col sm:flex-row items-center gap-4 relative group">
+                        <img src="${item.img}" class="w-20 h-20 rounded-xl object-cover border border-gold/30">
+                        <div class="flex-1 w-full space-y-2">
+                            <div class="flex gap-2">
+                                <input type="text" id="admItemName_${idx}" class="flex-1 bg-navy-dark border border-gold/30 rounded-xl px-3 py-2 text-sm text-white font-bold" value="${item.nameEn}" placeholder="Item Name">
+                                <input type="text" id="admItemPrice_${idx}" class="w-32 bg-navy-dark border border-gold/30 rounded-xl px-3 py-2 text-sm text-gold font-extrabold text-center" value="${item.price}" placeholder="Price">
+                            </div>
+                            <input type="text" id="admItemDesc_${idx}" class="w-full bg-navy-dark border border-gold/30 rounded-xl px-3 py-1.5 text-xs text-gray-300" value="${item.descEn}" placeholder="Description">
+                            <input type="text" id="admItemImg_${idx}" class="w-full bg-navy-dark border border-gold/30 rounded-xl px-3 py-1.5 text-xs text-gray-400" value="${item.img}" placeholder="Image URL">
+                        </div>
+                        <button onclick="deleteProduct(${idx})" class="absolute top-2 right-2 text-red-400 hover:text-red-500 bg-black/40 p-2 rounded-lg"><i class="fa-solid fa-trash"></i></button>
+                    </div>
+                `;
+            });
+        }
+
+        function addNewProductModal() {
+            const cat = restaurantData.menuCategories.find(c => c.id === adminActiveCat);
+            if (!cat) return;
+            cat.items.push({
+                nameEn: "New Product",
+                nameAr: "منتج جديد",
+                descEn: "Delicious freshly prepared meal.",
+                descAr: "وجبة طازجة لذيذة.",
+                price: "$10.00",
+                img: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500&auto=format&fit=crop&q=80"
+            });
+            renderAdminMenuItems();
+        }
+
+        function deleteProduct(idx) {
+            const cat = restaurantData.menuCategories.find(c => c.id === adminActiveCat);
+            if (cat) {
+                cat.items.splice(idx, 1);
+                renderAdminMenuItems();
+            }
+        }
+
+        function addNewCategoryModal() {
+            const catName = prompt("Enter new branch/category name (e.g. Desserts):", "Desserts");
+            if (catName) {
+                const newId = catName.toLowerCase().replace(/\s+/g, '-');
+                restaurantData.menuCategories.push({
+                    id: newId,
+                    nameEn: catName,
+                    nameAr: catName,
+                    icon: "fa-utensils",
+                    items: []
+                });
+                adminActiveCat = newId;
+                activeCategory = newId;
+                renderAdminCategoryTabs();
+                renderAdminMenuItems();
+            }
+        }
+
+        function deleteCategory(catId, e) {
+            e.stopPropagation();
+            if (restaurantData.menuCategories.length <= 1) {
+                alert("You must keep at least one category!");
+                return;
+            }
+            restaurantData.menuCategories = restaurantData.menuCategories.filter(c => c.id !== catId);
+            adminActiveCat = restaurantData.menuCategories[0].id;
+            activeCategory = adminActiveCat;
+            renderAdminCategoryTabs();
+            renderAdminMenuItems();
+        }
+
+        function saveAdminChanges() {
+            restaurantData.name = document.getElementById('adminRestName').value;
+            restaurantData.logoUrl = document.getElementById('adminLogoUrl').value;
+
+            restaurantData.sliderImages.forEach((slide, idx) => {
+                const imgVal = document.getElementById(`sliderImg_${idx}`).value;
+                const titleVal = document.getElementById(`sliderTitle_${idx}`).value;
+                if (imgVal) slide.img = imgVal;
+                if (titleVal) {
+                    slide.titleEn = titleVal;
+                    slide.titleAr = titleVal;
+                }
+            });
+
+            const cat = restaurantData.menuCategories.find(c => c.id === adminActiveCat);
+            if (cat) {
+                cat.items.forEach((item, idx) => {
+                    const nameVal = document.getElementById(`admItemName_${idx}`).value;
+                    const priceVal = document.getElementById(`admItemPrice_${idx}`).value;
+                    const descVal = document.getElementById(`admItemDesc_${idx}`).value;
+                    const imgVal = document.getElementById(`admItemImg_${idx}`).value;
+                    if (nameVal) item.nameEn = nameVal;
+                    if (priceVal) item.price = priceVal;
+                    if (descVal) item.descEn = descVal;
+                    if (imgVal) item.img = imgVal;
+                });
+            }
+
+            closeAdminModal();
+            renderAll();
+            showNotification(currentLang === 'ar' ? 'تم حفظ التغييرات وتحديث الموقع بنجاح!' : 'Changes saved and website updated successfully!');
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobileMenu').classList.toggle('hidden');
+        }
+
+        function orderItem(itemName) {
+            const msg = currentLang === 'ar' ? `تم إضافة "${itemName}" إلى طلبك بنجاح!` : `"${itemName}" has been added to your order!`;
+            showNotification(msg);
+        }
+
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            const msg = currentLang === 'ar' ? 'شكراً لك! تم إرسال رسالتك بنجاح.' : 'Thank you! Your message has been sent.';
+            showNotification(msg);
+            e.target.reset();
+        }
+
+        function showNotification(message) {
+            const div = document.createElement('div');
+            div.className = 'fixed bottom-6 right-6 z-50 bg-gold text-navy-dark font-bold px-6 py-4 rounded-2xl shadow-2xl border-2 border-white/30 animate-bounce';
+            div.innerText = message;
+            document.body.appendChild(div);
+            setTimeout(() => div.remove(), 4000);
+        }
+
+        window.onload = function() {
+            renderAll();
+        };
+    </script>
+</body>
+</html>
